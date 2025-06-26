@@ -740,15 +740,50 @@
         let isFirebaseReady = false;
 
         // Konfigurasi Firebase (disediakan oleh lingkungan Canvas)
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = (() => {
+            try {
+                // Mencoba mengurai __firebase_config yang disediakan
+                const parsedConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+                // Memeriksa apakah konfigurasi yang diurai mengandung kunci yang diperlukan. Jika tidak, gunakan default yang kuat.
+                if (parsedConfig.projectId && parsedConfig.apiKey) {
+                    return parsedConfig;
+                } else {
+                    console.warn("DEBUG: __firebase_config hilang properti yang diperlukan atau tidak disediakan. Menggunakan konfigurasi Firebase placeholder. MOHON GANTI INI DENGAN KONFIGURASI PROYEK FIREBASE ANDA YANG SEBENARNYA!");
+                    return {
+                        apiKey: "YOUR_API_KEY", // Ganti dengan kunci API Anda yang sebenarnya
+                        authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // Ganti dengan domain auth Anda yang sebenarnya
+                        projectId: "YOUR_PROJECT_ID", // Ganti dengan ID proyek Anda yang sebenarnya
+                        storageBucket: "YOUR_PROJECT_ID.appspot.com", // Ganti dengan bucket penyimpanan Anda yang sebenarnya
+                        messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Ganti dengan ID pengirim Anda yang sebenarnya
+                        appId: "YOUR_APP_ID", // Ganti dengan ID aplikasi Anda yang sebenarnya
+                        measurementId: "YOUR_MEASUREMENT_ID" // Ganti dengan ID pengukuran Anda yang sebenarnya (jika menggunakan Analytics)
+                    };
+                }
+            } catch (e) {
+                console.error("DEBUG: Kesalahan saat mengurai __firebase_config. Menggunakan konfigurasi Firebase placeholder. Kesalahan:", e);
+                return {
+                    apiKey: "YOUR_API_KEY", // Ganti dengan kunci API Anda yang sebenarnya
+                    authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // Ganti dengan domain auth Anda yang sebenarnya
+                    projectId: "YOUR_PROJECT_ID", // Ganti dengan ID proyek Anda yang sebenarnya
+                    storageBucket: "YOUR_PROJECT_ID.appspot.com", // Ganti dengan bucket penyimpanan Anda yang sebenarnya
+                    messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Ganti dengan ID pengirim Anda yang sebenarnya
+                    appId: "YOUR_APP_ID", // Ganti dengan ID aplikasi Anda yang sebenarnya
+                    measurementId: "YOUR_MEASUREMENT_ID" // Ganti dengan ID pengukuran Anda yang sebenarnya (jika menggunakan Analytics)
+                };
+            }
+        })();
+
+        // appId untuk jalur Firestore berbeda dengan ID aplikasi Firebase
+        const appIdForFirestore = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        // initialAuthToken tetap seperti apa adanya, karena terpisah dari firebaseConfig
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
 
         // Inisialisasi Firebase
         async function initializeFirebase() {
             try {
                 console.log("DEBUG: Memulai inisialisasi Firebase...");
-                if (!app) {
+                if (!app) { // Hanya inisialisasi sekali
                     app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
@@ -759,12 +794,17 @@
                             userId = user.uid;
                             console.log("Firebase Auth Ready. User ID:", userId);
                             document.getElementById('userIdDisplay').textContent = `User ID: ${userId}`;
-                            isFirebaseReady = true;
-                            console.log("DEBUG: Memuat semua data pengguna setelah autentikasi...");
-                            await loadAllUserData();
-                            console.log("DEBUG: Data pengguna dimuat. Menyiapkan pendengar real-time...");
-                            setupRealtimeListeners();
-                            console.log("DEBUG: Pendengar real-time disiapkan.");
+                            
+                            if (!isFirebaseReady) {
+                                isFirebaseReady = true;
+                                console.log("DEBUG: Memuat semua data pengguna setelah autentikasi...");
+                                await loadAllUserData();
+                                console.log("DEBUG: Data pengguna dimuat. Menyiapkan pendengar real-time...");
+                                setupRealtimeListeners();
+                                console.log("DEBUG: Pendengar real-time disiapkan.");
+                                // Sembunyikan modal secara eksplisit setelah semuanya diatur
+                                document.getElementById('customModal').classList.add('hidden'); 
+                            }
                         } else {
                             console.log("DEBUG: Tidak ada pengguna terautentikasi. Mencoba masuk...");
                             try {
@@ -793,6 +833,7 @@
 
         // Fungsi untuk menampilkan modal pesan kustom
         function showMessage(message) {
+            console.trace(`showMessage called with: ${message}`); // Tambahkan trace di sini
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('customModal').classList.remove('hidden');
         }
@@ -985,7 +1026,7 @@
             }
             try {
                 console.log("DEBUG: Memuat data profil dan tema...");
-                const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
                 const profileDocSnap = await getDoc(profileDocRef);
                 if (profileDocSnap.exists()) {
                     const data = profileDocSnap.data();
@@ -1007,7 +1048,7 @@
                 document.getElementById('themeSelect').value = currentTheme;
 
                 console.log("DEBUG: Memuat tautan eksternal...");
-                const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
+                const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
                 const linksDocSnap = await getDoc(linksDocRef);
                 if (linksDocSnap.exists()) {
                     externalLinks = linksDocSnap.data();
@@ -1038,7 +1079,7 @@
             }
 
             console.log("DEBUG: Menyiapkan pendengar modul...");
-            const modulesCollectionRef = collection(db, 'artifacts', appId, 'users', userId, 'modules');
+            const modulesCollectionRef = collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules');
             onSnapshot(modulesCollectionRef, (snapshot) => {
                 const updatedModules = [];
                 snapshot.forEach(doc => {
@@ -1053,7 +1094,7 @@
             });
 
              console.log("DEBUG: Menyiapkan pendengar tautan eksternal...");
-            const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
+            const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
             onSnapshot(linksDocRef, (docSnap) => {
                 if (docSnap.exists()) {
                     externalLinks = docSnap.data();
@@ -1075,7 +1116,7 @@
             });
 
             console.log("DEBUG: Menyiapkan pendengar profil dan pengaturan...");
-            const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
+            const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
             onSnapshot(profileDocRef, (docSnap) => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
@@ -1140,7 +1181,7 @@
                 profileData.email = document.getElementById('emailGuru').value;
                 profileData.nomorWA = document.getElementById('nomorWAGuru').value;
 
-                const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
                 await setDoc(profileDocRef, profileData, { merge: true }); // Gabungkan untuk memperbarui hanya bidang yang berubah
                 showMessage('Profil berhasil disimpan!');
             } catch (error) {
@@ -1231,7 +1272,7 @@
                 return;
             }
             try {
-                const moduleDocRef = doc(db, 'artifacts', appId, 'users', userId, 'modules', id);
+                const moduleDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules', id);
                 await setDoc(moduleDocRef, { [field]: value }, { merge: true });
                 showMessage('Modul ajar berhasil diperbarui.');
             } catch (error) {
@@ -1246,7 +1287,7 @@
                 return;
             }
             try {
-                const moduleDocRef = doc(db, 'artifacts', appId, 'users', userId, 'modules', id);
+                const moduleDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules', id);
                 await deleteDoc(moduleDocRef);
                 showMessage('Modul ajar berhasil dihapus.');
             } catch (error) {
@@ -1273,7 +1314,7 @@
             if (modulesData.length < MAX_MODULES) {
                 try {
                     const newModule = { subject: '', link: '' };
-                    const docRef = await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'modules'), newModule);
+                    const docRef = await addDoc(collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules'), newModule);
                     console.log("DEBUG: Document written with ID: ", docRef.id);
                     showMessage('Modul ajar baru ditambahkan!');
                 } catch (e) {
@@ -1296,7 +1337,7 @@
                 for (let i = 0; i < modulesToAdd && (modulesData.length + addedCount) < MAX_MODULES; i++) {
                     try {
                         const newModule = { subject: '', link: '' };
-                        await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'modules'), newModule);
+                        await addDoc(collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules'), newModule);
                         addedCount++;
                     } catch (e) {
                         console.error("DEBUG: Error adding document during fill:", e);
@@ -1322,7 +1363,7 @@
                 return;
             }
             try {
-                const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
+                const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
                 await setDoc(linksDocRef, { [inputId]: value }, { merge: true });
                 externalLinks[inputId] = value; // Perbarui status lokal segera
                 console.log(`DEBUG: Tautan untuk ${inputId} disimpan.`);
@@ -1358,7 +1399,7 @@
                 return;
             }
             try {
-                const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
                 await setDoc(profileDocRef, { theme: selectedTheme }, { merge: true });
                 currentTheme = selectedTheme; // Perbarui status lokal
                 applyTheme(selectedTheme);
@@ -1383,6 +1424,7 @@
 
         // Penyiapan awal
         document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('customModal').classList.add('hidden'); // Pastikan modal tersembunyi saat dimuat
             initializeFirebase(); // Mulai inisialisasi dan autentikasi Firebase
             showSection('home');
         });
