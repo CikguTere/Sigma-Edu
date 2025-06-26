@@ -741,10 +741,12 @@
         // Initialize Firebase
         async function initializeFirebase() {
             try {
+                console.log("DEBUG: Memulai inisialisasi Firebase...");
                 if (!app) {
                     app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
+                    console.log("DEBUG: Firebase app, db, auth berhasil diinisialisasi.");
 
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
@@ -752,22 +754,34 @@
                             console.log("Firebase Auth Ready. User ID:", userId);
                             document.getElementById('userIdDisplay').textContent = `User ID: ${userId}`;
                             isFirebaseReady = true;
-                            // Load all data after auth is ready
+                            console.log("DEBUG: Memuat semua data pengguna setelah autentikasi...");
                             await loadAllUserData();
-                            setupRealtimeListeners(); // Setup real-time listeners after initial load
+                            console.log("DEBUG: Data pengguna dimuat. Menyiapkan pendengar real-time...");
+                            setupRealtimeListeners();
+                            console.log("DEBUG: Pendengar real-time disiapkan.");
                         } else {
-                            // Sign in anonymously if no token or user
-                            if (initialAuthToken) {
-                                await signInWithCustomToken(auth, initialAuthToken);
-                            } else {
-                                await signInAnonymously(auth);
+                            console.log("DEBUG: Tidak ada pengguna terautentikasi. Mencoba masuk...");
+                            try {
+                                if (initialAuthToken) {
+                                    await signInWithCustomToken(auth, initialAuthToken);
+                                    console.log("DEBUG: Berhasil masuk dengan token kustom.");
+                                } else {
+                                    await signInAnonymously(auth);
+                                    console.log("DEBUG: Berhasil masuk secara anonim.");
+                                }
+                            } catch (authError) {
+                                console.error("DEBUG: Kesalahan saat masuk Firebase:", authError);
+                                showMessage("Kesalahan masuk. Mohon coba lagi.");
                             }
                         }
+                    }, (error) => {
+                        console.error("DEBUG: Kesalahan di onAuthStateChanged listener:", error);
+                        showMessage("Kesalahan autentikasi Firebase. Mohon coba lagi.");
                     });
                 }
             } catch (error) {
-                console.error("Error initializing Firebase or signing in:", error);
-                showMessage("Gagal menginisialisasi layanan data. Mohon coba lagi nanti.");
+                console.error("DEBUG: Kesalahan Kritis selama inisialisasi Firebase (initializeApp, getFirestore, getAuth):", error);
+                showMessage("Gagal menginisialisasi layanan data. Mohon periksa konsol untuk detail.");
             }
         }
 
@@ -944,27 +958,27 @@
                             img { max-width: 100%; height: auto; display: block; margin-bottom: 20px; }
                             .modul-item { border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px; }
                         </style>
-                    </head>
-                    <body>
-                        ${printContent.innerHTML}
-                    </body>
-                    </html>
-                `);
-                printWindow.document.close();
-                printWindow.print();
-            }
+                </head>
+                <body>
+                    ${printContent.innerHTML}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
         }
+    }
 
         // --- Firebase Data Loading and Listeners ---
 
         // Function to load all user data from Firestore
         async function loadAllUserData() {
             if (!isFirebaseReady) {
-                console.warn("Firebase not ready for data loading.");
+                console.warn("DEBUG: Firebase belum siap untuk memuat data.");
                 return;
             }
             try {
-                // Load Profile Data and Theme
+                console.log("DEBUG: Memuat data profil dan tema...");
                 const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
                 const profileDocSnap = await getDoc(profileDocRef);
                 if (profileDocSnap.exists()) {
@@ -977,16 +991,21 @@
                         photo: data.photo || ''
                     };
                     currentTheme = data.theme || 'default';
+                    console.log("DEBUG: Data profil dimuat:", profileData);
+                    console.log("DEBUG: Tema dimuat:", currentTheme);
+                } else {
+                    console.log("DEBUG: Dokumen profil tidak ditemukan, menggunakan data default.");
                 }
                 loadProfileData(); // Update UI with loaded profile
                 applyTheme(currentTheme); // Apply loaded theme
                 document.getElementById('themeSelect').value = currentTheme;
 
-                // Load External Links
+                console.log("DEBUG: Memuat tautan eksternal...");
                 const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
                 const linksDocSnap = await getDoc(linksDocRef);
                 if (linksDocSnap.exists()) {
                     externalLinks = linksDocSnap.data();
+                    console.log("DEBUG: Tautan eksternal dimuat:", externalLinks);
                     // Populate input fields with loaded links
                     for (const key in externalLinks) {
                         const inputElement = document.getElementById(key);
@@ -994,19 +1013,25 @@
                             inputElement.value = externalLinks[key];
                         }
                     }
+                } else {
+                    console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, menggunakan data kosong.");
+                    externalLinks = {}; // Reset if document doesn't exist
                 }
 
             } catch (error) {
-                console.error("Error loading user data:", error);
-                showMessage("Gagal memuat data. Mungkin Anda perlu memasukkan data terlebih dahulu.");
+                console.error("DEBUG: Error in loadAllUserData:", error);
+                showMessage("Gagal memuat data. Mohon coba lagi atau masukkan data jika ini adalah pertama kali.");
             }
         }
 
         // Setup real-time listeners for modules
         function setupRealtimeListeners() {
-            if (!isFirebaseReady) return;
+            if (!isFirebaseReady) {
+                console.warn("DEBUG: Firebase belum siap, tidak dapat menyiapkan pendengar real-time.");
+                return;
+            }
 
-            // Modules listener (path remains the same as it was already correct)
+            console.log("DEBUG: Menyiapkan pendengar modul...");
             const modulesCollectionRef = collection(db, 'artifacts', appId, 'users', userId, 'modules');
             onSnapshot(modulesCollectionRef, (snapshot) => {
                 const updatedModules = [];
@@ -1015,16 +1040,18 @@
                 });
                 modulesData = updatedModules;
                 renderModules(); // Re-render modules whenever data changes in Firestore
+                console.log("DEBUG: Modul diperbarui secara real-time:", modulesData);
             }, (error) => {
-                console.error("Error listening to modules:", error);
+                console.error("DEBUG: Kesalahan saat mendengarkan modul:", error);
                 showMessage("Gagal memuat modul ajar secara real-time.");
             });
 
-             // Listen for changes on external links
+             console.log("DEBUG: Menyiapkan pendengar tautan eksternal...");
             const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
             onSnapshot(linksDocRef, (docSnap) => {
                 if (docSnap.exists()) {
                     externalLinks = docSnap.data();
+                    console.log("DEBUG: Tautan eksternal diperbarui secara real-time:", externalLinks);
                     // Update relevant input fields
                     for (const key in externalLinks) {
                         const inputElement = document.getElementById(key);
@@ -1033,13 +1060,15 @@
                         }
                     }
                 } else {
+                    console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, mereset data.");
                     externalLinks = {}; // Reset if document doesn't exist
                 }
             }, (error) => {
-                console.error("Error listening to external links:", error);
+                console.error("DEBUG: Kesalahan saat mendengarkan tautan eksternal:", error);
+                showMessage("Gagal memuat tautan eksternal secara real-time.");
             });
 
-            // Listen for changes on profile and settings (including theme)
+            console.log("DEBUG: Menyiapkan pendengar profil dan pengaturan...");
             const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
             onSnapshot(profileDocRef, (docSnap) => {
                 if (docSnap.exists()) {
@@ -1055,9 +1084,13 @@
                     loadProfileData(); // Update profile UI
                     applyTheme(currentTheme); // Apply theme
                     document.getElementById('themeSelect').value = currentTheme;
+                    console.log("DEBUG: Profil dan pengaturan diperbarui secara real-time:", profileData, currentTheme);
+                } else {
+                    console.log("DEBUG: Dokumen profil dan pengaturan tidak ditemukan, menggunakan data default.");
                 }
             }, (error) => {
-                console.error("Error listening to profile and settings:", error);
+                console.error("DEBUG: Kesalahan saat mendengarkan profil dan pengaturan:", error);
+                showMessage("Gagal memuat profil dan pengaturan secara real-time.");
             });
         }
 
@@ -1105,7 +1138,7 @@
                 await setDoc(profileDocRef, profileData, { merge: true }); // Merge to update only changed fields
                 showMessage('Profil berhasil disimpan!');
             } catch (error) {
-                console.error("Error saving profile data:", error);
+                console.error("DEBUG: Error saving profile data:", error);
                 showMessage("Gagal menyimpan profil. Mohon coba lagi.");
             }
         }
@@ -1195,7 +1228,7 @@
                 await setDoc(moduleDocRef, { [field]: value }, { merge: true });
                 showMessage('Modul ajar berhasil diperbarui.');
             } catch (error) {
-                console.error("Error updating module:", error);
+                console.error("DEBUG: Error updating module:", error);
                 showMessage("Gagal memperbarui modul ajar. Mohon coba lagi.");
             }
         }
@@ -1210,7 +1243,7 @@
                 await deleteDoc(moduleDocRef);
                 showMessage('Modul ajar berhasil dihapus.');
             } catch (error) {
-                console.error("Error deleting module:", error);
+                console.error("DEBUG: Error deleting module:", error);
                 showMessage("Gagal menghapus modul ajar. Mohon coba lagi.");
             }
         }
@@ -1234,10 +1267,10 @@
                 try {
                     const newModule = { subject: '', link: '' };
                     const docRef = await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'modules'), newModule);
-                    console.log("Document written with ID: ", docRef.id);
+                    console.log("DEBUG: Document written with ID: ", docRef.id);
                     showMessage('Modul ajar baru ditambahkan!');
                 } catch (e) {
-                    console.error("Error adding document: ", e);
+                    console.error("DEBUG: Error adding document: ", e);
                     showMessage("Gagal menambahkan modul ajar. Mohon coba lagi.");
                 }
             } else {
@@ -1255,9 +1288,9 @@
                 const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
                 await setDoc(linksDocRef, { [inputId]: value }, { merge: true });
                 externalLinks[inputId] = value; // Update local state immediately
-                console.log(`Link for ${inputId} saved.`);
+                console.log(`DEBUG: Link for ${inputId} saved.`);
             } catch (error) {
-                console.error(`Error saving link for ${inputId}:`, error);
+                console.error(`DEBUG: Error saving link for ${inputId}:`, error);
                 showMessage(`Gagal menyimpan tautan untuk ${inputId}.`);
             }
         }
@@ -1294,7 +1327,7 @@
                 applyTheme(selectedTheme);
                 showMessage('Tema berhasil disimpan!');
             } catch (error) {
-                console.error("Error saving theme:", error);
+                console.error("DEBUG: Error saving theme:", error);
                 showMessage("Gagal menyimpan tema. Mohon coba lagi.");
             }
         });
