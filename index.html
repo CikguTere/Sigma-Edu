@@ -258,12 +258,13 @@
                 <h1 class="text-3xl font-bold flex items-center">
                     <i class="fas fa-graduation-cap mr-3"></i> Sigma Edu
                 </h1>
-                <p class="text-sm mt-1">Developed by Cikgu Tere</p>
+                <p class="text-sm mt-1">Dikembangkan oleh Cikgu Tere</p>
+                <div id="userIdDisplay" class="text-xs mt-1"></div>
             </div>
             <div class="flex items-center space-x-4">
-                <!-- Profile Thumbnail in Header -->
+                <!-- Profil Thumbnail di Header -->
                 <div id="headerProfileThumbnail" class="profile-thumbnail-container" onclick="showSection('profilGuru')">
-                    <!-- Image or Icon will be loaded by JavaScript -->
+                    <!-- Gambar atau Ikon akan dimuat oleh JavaScript -->
                     <img id="headerProfilePhoto" src="" alt="Profil" class="profile-thumbnail hidden">
                     <i id="headerProfileIcon" class="fas fa-user-circle profile-icon hidden"></i>
                 </div>
@@ -276,19 +277,19 @@
         </div>
     </header>
 
-    <!-- Main Content Area - no sidebar -->
-    <div class="flex flex-1 pt-4 pb-4 px-4 md:px-8 lg:px-12"> <!-- Adjusted padding for no sidebar -->
+    <!-- Area Konten Utama - tanpa sidebar -->
+    <div class="flex flex-1 pt-4 pb-4 px-4 md:px-8 lg:px-12"> <!-- Padding disesuaikan untuk tanpa sidebar -->
         <main class="flex-1 max-w-full">
-            <!-- Home Section (Dashboard with Menu Cards) -->
+            <!-- Bagian Beranda (Dashboard dengan Kartu Menu) -->
             <section id="home" class="content-section bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center active-section">
                 <i class="fas fa-home text-blue-600 mb-4 text-5xl"></i>
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">Selamat Datang di Portal Administrasi Guru!</h2>
                 <p class="text-lg text-gray-700 mb-6">
                     Pilih menu di bawah ini untuk memulai pengelolaan administrasi Anda.
                 </p>
-                <!-- Menu Cards Grid -->
+                <!-- Grid Kartu Menu -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-5xl">
-                    <!-- REMOVED Profile Card from here, now in header -->
+                    <!-- Kartu Profil DIHAPUS dari sini, sekarang ada di header -->
                     <div class="menu-card card-blue p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('jadwalMengajar')">
                         <i class="fas fa-calendar-alt text-5xl mb-3"></i>
                         <h3 class="text-xl font-semibold">Jadwal Mengajar</h3>
@@ -332,7 +333,7 @@
                 </div>
             </section>
 
-            <!-- Profil Guru Section -->
+            <!-- Bagian Profil Guru -->
             <section id="profilGuru" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -389,7 +390,7 @@
                 </div>
             </section>
 
-            <!-- Jadwal Mengajar Section -->
+            <!-- Bagian Jadwal Mengajar -->
             <section id="jadwalMengajar" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -401,7 +402,7 @@
                 <div class="mb-6 w-full max-w-2xl">
                     <label for="jadwalLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Dokumen Jadwal (Google Calendar/Sheet/Canva, dll.):</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" id="jadwalLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=... atau tautan Canva">
+                        <input type="text" id="jadwalLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=...">
                         <button onclick="openLink('jadwalLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt w-4 h-4"></i>
                             <span>Buka & Kelola/Unduh</span>
@@ -417,7 +418,7 @@
                 </button>
             </section>
 
-            <!-- Data Siswa Section -->
+            <!-- Bagian Data Siswa -->
             <section id="dataSiswa" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -445,7 +446,7 @@
                 </button>
             </section>
 
-            <!-- Daftar Hadir Section -->
+            <!-- Bagian Daftar Hadir -->
             <section id="daftarHadir" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -473,7 +474,7 @@
                 </button>
             </section>
 
-            <!-- Modul Ajar Section -->
+            <!-- Bagian Modul Ajar -->
             <section id="modulAjar" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -484,21 +485,27 @@
                 <p class="text-lg text-gray-700 mb-6">Kelola modul ajar Anda per mata pelajaran dengan tautan Google Docs/Drive.</p>
 
                 <div id="modulAjarList" class="w-full flex flex-col gap-4 max-w-2xl">
-                    <!-- Module items will be rendered here by JavaScript -->
+                    <!-- Item modul akan dirender di sini oleh JavaScript -->
                 </div>
 
-                <button id="addModuleBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-6 transition duration-300 ease-in-out transform hover:scale-105">
-                    <i class="fas fa-plus"></i>
-                    <span>Tambah Modul Ajar</span>
-                </button>
-
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <button id="addModuleBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-plus"></i>
+                        <span>Tambah Modul Ajar</span>
+                    </button>
+                    <button id="fill8ModulesBtn" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-th-large"></i>
+                        <span>Isi 8 Modul Kosong</span>
+                    </button>
+                </div>
+                
                 <button onclick="printSection('modulAjar')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
                 </button>
             </section>
 
-            <!-- Program Semester & Tahunan Section -->
+            <!-- Bagian Program Semester & Tahunan -->
             <section id="programSemester" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -526,7 +533,7 @@
                 </button>
             </section>
 
-            <!-- Kalender Pendidikan Section -->
+            <!-- Bagian Kalender Pendidikan -->
             <section id="kalenderPendidikan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -554,7 +561,7 @@
                 </button>
             </section>
 
-            <!-- Asesmen Section -->
+            <!-- Bagian Asesmen -->
             <section id="asesmen" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -582,7 +589,7 @@
                 </button>
             </section>
 
-            <!-- Karya Inovatif Section -->
+            <!-- Bagian Karya Inovatif -->
             <section id="karyaInovatif" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -590,11 +597,11 @@
                 </button>
                 <i class="fas fa-lightbulb text-blue-600 mb-4 text-5xl"></i>
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">Karya Inovatif</h2>
-                <p class="text-lg text-gray-700 mb-6">Tautan ke file Google Drive yang berisi karya guru. Tambahkan deskripsi, tanggal, dan jenis karya.</p>
+                <p class="text-lg text-gray-700 mb-6">Dokumen berisi rekap karya inovatif yang telah dibuat guru. Dapat berupa Google Docs, Slides, atau PDF.</p>
                 <div class="mb-6 w-full max-w-2xl">
-                    <label for="karyaInovatifLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Drive Karya Inovatif:</label>
+                    <label for="karyaInovatifLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Dokumen Karya Inovatif:</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" id="karyaInovatifLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://drive.google.com/drive/folders/...">
+                        <input type="text" id="karyaInovatifLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/presentation/d/e/...">
                         <button onclick="openLink('karyaInovatifLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt w-4 h-4"></i>
                             <span>Buka & Kelola/Unduh</span>
@@ -610,7 +617,7 @@
                 </button>
             </section>
 
-            <!-- Riwayat Pelatihan Section -->
+            <!-- Bagian Riwayat Pelatihan -->
             <section id="riwayatPelatihan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -618,18 +625,18 @@
                 </button>
                 <i class="fas fa-graduation-cap text-blue-600 mb-4 text-5xl"></i>
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">Riwayat Pelatihan</h2>
-                <p class="text-lg text-gray-700 mb-6">Form entri dan daftar pelatihan yang sudah diikuti. Tampilkan tanggal, topik, penyelenggara, dan bukti.</p>
+                <p class="text-lg text-gray-700 mb-6">Rekap riwayat pelatihan yang pernah diikuti guru beserta sertifikat. Dokumen diambil dari Google Drive.</p>
                 <div class="mb-6 w-full max-w-2xl">
-                    <label for="riwayatPelatihanLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Sheet Riwayat Pelatihan:</label>
+                    <label for="riwayatPelatihanLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Drive Folder Pelatihan:</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" id="riwayatPelatihanLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/spreadsheets/d/e/...">
+                        <input type="text" id="riwayatPelatihanLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://drive.google.com/drive/folders/...">
                         <button onclick="openLink('riwayatPelatihanLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt w-4 h-4"></i>
                             <span>Buka & Kelola/Unduh</span>
                         </button>
                     </div>
                     <p class="text-sm text-gray-600 mt-2 text-left">
-                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Drive Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
                 <button onclick="printSection('riwayatPelatihan', 'riwayatPelatihanLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
@@ -638,7 +645,7 @@
                 </button>
             </section>
 
-            <!-- Program Kerja Guru Section -->
+            <!-- Bagian Program Kerja Guru -->
             <section id="programKerjaGuru" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
@@ -646,12 +653,12 @@
                 </button>
                 <i class="fas fa-clipboard-list text-blue-600 mb-4 text-5xl"></i>
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">Program Kerja Guru</h2>
-                <p class="text-lg text-gray-700 mb-6">Format tabel atau daftar kerja tahunan guru. Dapat diambil dari Google Docs.</p>
+                <p class="text-lg text-gray-700 mb-6">Dokumen berisi daftar program kerja guru untuk tahun ajaran terkait.</p>
                 <div class="mb-6 w-full max-w-2xl">
-                    <label for="programKerjaLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Docs Program Kerja:</label>
+                    <label for="programKerjaGuruLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Dokumen Program Kerja Guru (Google Docs/Sheets/Slides):</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" id="programKerjaLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/document/d/e/...">
-                        <button onclick="openLink('programKerjaLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                        <input type="text" id="programKerjaGuruLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/document/d/e/...">
+                        <button onclick="openLink('programKerjaGuruLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt w-4 h-4"></i>
                             <span>Buka & Kelola/Unduh</span>
                         </button>
@@ -660,50 +667,34 @@
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
-                <button onclick="printSection('programKerjaGuru', 'programKerjaLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                <button onclick="printSection('programKerjaGuru', 'programKerjaGuruLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
                 </button>
             </section>
 
-            <!-- Pengaturan Section (Sederhana) -->
+            <!-- Bagian Pengaturan -->
             <section id="pengaturan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
-                <!-- Added back button for settings section -->
                 <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-arrow-left"></i>
                     <span>Kembali ke Beranda</span>
                 </button>
                 <i class="fas fa-cog text-blue-600 mb-4 text-5xl"></i>
-                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Pengaturan</h2>
-                <p class="text-lg text-gray-700 mb-6">Sesuaikan pengaturan website Anda. Fitur ini masih dalam pengembangan untuk penambahan dan pengaturan urutan menu secara dinamis.</p>
-                <div class="w-full max-w-xl text-left">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Tema Warna</h3>
-                    <div class="flex flex-wrap gap-4 mb-6">
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('default')">
-                            <span>Tema Biru</span>
-                        </button>
-                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('green')">
-                            <span>Tema Hijau</span>
-                        </button>
-                        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('purple')">
-                            <span>Tema Ungu</span>
-                        </button>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Pengaturan Aplikasi</h2>
+                <p class="text-lg text-gray-700 mb-6">Sesuaikan tampilan dan perilaku aplikasi Anda.</p>
+                <div class="w-full max-w-md text-left">
+                    <div class="mb-6">
+                        <label for="themeSelect" class="block text-gray-700 text-sm font-bold mb-2">Pilih Tema:</label>
+                        <select id="themeSelect" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="default">Biru (Default)</option>
+                            <option value="green">Hijau</option>
+                            <option value="purple">Ungu</option>
+                        </select>
                     </div>
-
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Manajemen Menu (Pengembangan)</h3>
-                    <p class="text-gray-700 mb-4">Fitur untuk menambah/mengedit/mengurutkan menu akan tersedia di pembaruan selanjutnya.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Tambah Menu sedang dalam pengembangan.')">
-                            <i class="fas fa-plus-circle"></i>
-                            <span>Tambah Menu</span>
-                        </button>
-                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Edit Menu sedang dalam pengembangan.')">
-                            <i class="fas fa-edit"></i>
-                            <span>Edit Menu</span>
-                        </button>
-                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Hapus Menu sedang dalam pengembangan.')">
-                            <i class="fas fa-trash-alt"></i>
-                            <span>Hapus Menu</span>
+                    <div class="flex justify-center">
+                        <button id="saveSettingsBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-save"></i>
+                            <span>Simpan Pengaturan</span>
                         </button>
                     </div>
                 </div>
@@ -711,445 +702,741 @@
         </main>
     </div>
 
-    <!-- Custom Modal Structure -->
+    <!-- Custom Modal for Messages -->
     <div id="customModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <p id="modalMessage" class="text-lg text-gray-800 mb-6"></p>
+            <p id="modalMessage" class="text-gray-800 text-lg mb-6"></p>
             <button id="modalCloseBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
                 OK
             </button>
         </div>
     </div>
 
-    <script>
-        // Store profile data
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, query, onSnapshot, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const sections = document.querySelectorAll('.content-section');
+        const MAX_MODULES = 10; // Batas maksimum modul ajar
+        let modulesData = []; // Akan diisi oleh listener Firestore
         let profileData = {
-            nama: "Nama Guru Lengkap",
-            nip: "123456789012345678",
-            email: "guru.example@sekolah.sch.id",
-            nomorWA: "0812-3456-7890",
-            photo: "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto" // Default placeholder image
+            nama: '[Nama Guru]',
+            nip: '[NIP]',
+            email: '[Email]',
+            nomorWA: '[Nomor WA]',
+            photo: '' // String Base64 untuk foto
         };
+        let externalLinks = {}; // Akan diisi oleh Firestore
+        let currentTheme = 'default'; // Akan diisi oleh Firestore
 
-        // Store modules data (initially 8 empty placeholders)
-        let modulesData = Array.from({ length: 8 }, () => ({ subject: '', link: '' }));
-        // Example for clarity (remove or modify in production)
-        modulesData[0] = { subject: 'Matematika', link: 'https://docs.google.com/document/d/1Wp2jK3nL5m_fQx_zY_G8s0pE0cW_y_X0/edit?usp=sharing' };
+        const defaultProfilePhoto = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto"; // Placeholder gambar
 
-        const MAX_MODULES = 20; // Limit for modules
+        // Variabel global Firebase
+        let app;
+        let db;
+        let auth;
+        let userId = 'anonymous'; // userId default atau sementara
+        let isFirebaseReady = false;
 
-        // --- Custom Modal Functions ---
+        // Konfigurasi Firebase (disediakan oleh lingkungan Canvas)
+        const firebaseConfig = (() => {
+            try {
+                // Mencoba mengurai __firebase_config yang disediakan
+                const parsedConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+                // Memeriksa apakah konfigurasi yang diurai mengandung kunci yang diperlukan. Jika tidak, gunakan default yang kuat.
+                // PERHATIAN: Ganti nilai placeholder ini dengan detail proyek Firebase Anda yang sebenarnya!
+                if (parsedConfig.projectId && parsedConfig.apiKey) {
+                    return parsedConfig;
+                } else {
+                    console.warn("DEBUG: __firebase_config hilang properti yang diperlukan atau tidak disediakan. Menggunakan konfigurasi Firebase placeholder. MOHON GANTI INI DENGAN KONFIGURASI PROYEK FIREBASE ANDA YANG SEBENARNYA!");
+                    return {
+                        apiKey: "AIzaSyBw7Nhp2BfEo4XsFzQh455wfkg6lh8k5b4", // Ganti dengan kunci API Anda yang sebenarnya
+                        authDomain: "sigma-edu-cb899.firebaseapp.com", // Ganti dengan domain auth Anda yang sebenarnya
+                        projectId: "sigma-edu-cb899", // Ganti dengan ID proyek Anda yang sebenarnya
+                        storageBucket: "sigma-edu-cb899.firebasestorage.app", // Ganti dengan bucket penyimpanan Anda yang sebenarnya
+                        messagingSenderId: "685246948782", // Ganti dengan ID pengirim Anda yang sebenarnya
+                        appId: "1:685246948782:web:f9ab9ec0c201113513543f", // Ganti dengan ID aplikasi Anda yang sebenarnya
+                        measurementId: "G-7SKBNVFBKS" // Ganti dengan ID pengukuran Anda yang sebenarnya (jika menggunakan Analytics)
+                    };
+                }
+            } catch (e) {
+                console.error("DEBUG: Kesalahan saat mengurai __firebase_config. Menggunakan konfigurasi Firebase placeholder. Kesalahan:", e);
+                return {
+                    apiKey: "AIzaSyBw7Nhp2BfEo4XsFzQh455wfkg6lh8k5b4", // Ganti dengan kunci API Anda yang sebenarnya
+                    authDomain: "sigma-edu-cb899.firebaseapp.com", // Ganti dengan domain auth Anda yang sebenarnya
+                    projectId: "sigma-edu-cb899", // Ganti dengan ID proyek Anda yang sebenarnya
+                    storageBucket: "sigma-edu-cb899.firebasestorage.app", // Ganti dengan bucket penyimpanan Anda yang sebenarnya
+                    messagingSenderId: "685246948782", // Ganti dengan ID pengirim Anda yang sebenarnya
+                    appId: "1:685246948782:web:f9ab9ec0c201113513543f", // Ganti dengan ID aplikasi Anda yang sebenarnya
+                    measurementId: "G-7SKBNVFBKS" // Ganti dengan ID pengukuran Anda yang sebenarnya (jika menggunakan Analytics)
+                };
+            }
+        })();
+
+        // appId untuk jalur Firestore berbeda dengan ID aplikasi Firebase (firebaseConfig.appId)
+        const appIdForFirestore = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        // initialAuthToken tetap seperti apa adanya, karena terpisah dari firebaseConfig
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Inisialisasi Firebase
+        async function initializeFirebase() {
+            try {
+                console.log("DEBUG: Memulai inisialisasi Firebase...");
+                
+                // Cek apakah konfigurasi Firebase masih menggunakan placeholder
+                if (firebaseConfig.projectId === "YOUR_PROJECT_ID" || firebaseConfig.apiKey === "YOUR_API_KEY") {
+                    showMessage("Kesalahan: Konfigurasi Firebase Anda belum diatur! Mohon ganti placeholder 'YOUR_API_KEY', 'YOUR_PROJECT_ID', dll. dengan kredensial Firebase Anda yang sebenarnya di dalam kode. Lihat bagian '<script type=\"module\">' di dalam file HTML.");
+                    console.error("DEBUG: Inisialisasi Firebase dibatalkan karena konfigurasi placeholder ditemukan.");
+                    return; // Hentikan inisialisasi lebih lanjut
+                }
+
+                if (!app) { // Hanya inisialisasi sekali
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                    console.log("DEBUG: Firebase app, db, auth berhasil diinisialisasi.");
+
+                    onAuthStateChanged(auth, async (user) => {
+                        if (user) {
+                            userId = user.uid;
+                            console.log("Firebase Auth Ready. User ID:", userId);
+                            document.getElementById('userIdDisplay').textContent = `User ID: ${userId}`;
+                            
+                            if (!isFirebaseReady) {
+                                isFirebaseReady = true;
+                                console.log("DEBUG: Memuat semua data pengguna setelah autentikasi...");
+                                await loadAllUserData();
+                                console.log("DEBUG: Data pengguna dimuat. Menyiapkan pendengar real-time...");
+                                setupRealtimeListeners();
+                                console.log("DEBUG: Pendengar real-time disiapkan.");
+                                // Sembunyikan modal secara eksplisit setelah semuanya diatur
+                                document.getElementById('customModal').classList.add('hidden'); 
+                            }
+                        } else {
+                            console.log("DEBUG: Tidak ada pengguna terautentikasi. Mencoba masuk...");
+                            try {
+                                if (initialAuthToken) {
+                                    await signInWithCustomToken(auth, initialAuthToken);
+                                    console.log("DEBUG: Berhasil masuk dengan token kustom.");
+                                } else {
+                                    await signInAnonymously(auth);
+                                    console.log("DEBUG: Berhasil masuk secara anonim.");
+                                }
+                            } catch (authError) {
+                                console.error("DEBUG: Kesalahan saat masuk Firebase:", authError);
+                                showMessage("Kesalahan masuk. Mohon coba lagi.");
+                            }
+                        }
+                    }, (error) => {
+                        console.error("DEBUG: Kesalahan di onAuthStateChanged listener:", error);
+                        showMessage("Kesalahan autentikasi Firebase. Mohon coba lagi.");
+                    });
+                }
+            } catch (error) {
+                console.error("DEBUG: Kesalahan Kritis selama inisialisasi Firebase (initializeApp, getFirestore, getAuth):", error);
+                // Hanya tampilkan pesan umum jika bukan karena placeholder
+                if (error.code !== "app/no-project-id") { // FirebaseError code for missing project ID
+                    showMessage("Gagal menginisialisasi layanan data. Mohon periksa konsol untuk detail.");
+                }
+            }
+        }
+
+        // Fungsi untuk menampilkan modal pesan kustom
         function showMessage(message) {
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('customModal').classList.remove('hidden');
         }
 
+        // --- Paparkan fungsi ke lingkup global ---
+        // Fungsi-fungsi ini dipanggil langsung dari atribut onclick HTML,
+        // jadi mereka perlu diakses secara global.
+        window.showMessage = showMessage;
+        window.showSection = showSection;
+        window.openLink = openLink;
+        window.printSection = printSection;
+        window.updateModule = updateModule; // Digunakan dalam input Modul Ajar
+        window.deleteModule = deleteModule; // Digunakan dalam tombol Modul Ajar
+        window.openModuleLinkById = openModuleLinkById; // Digunakan dalam tombol Modul Ajar
+
+
+        // Fungsi untuk menyembunyikan modal pesan kustom
         document.getElementById('modalCloseBtn').addEventListener('click', () => {
             document.getElementById('customModal').classList.add('hidden');
         });
 
-        // --- Theme Functions ---
-        const themes = {
-            'default': {
-                '--primary-bg': '#2563eb',
-                '--primary-hover': '#1d4ed8',
-                '--secondary-bg': '#3b82f6',
-                '--text-light': '#ffffff',
-                '--text-dark': '#1f2937',
-                '--body-bg': '#f0f4f8',
-            },
-            'green': {
-                '--primary-bg': '#16a34a',
-                '--primary-hover': '#15803d',
-                '--secondary-bg': '#22c55e',
-                '--text-light': '#ffffff',
-                '--text-dark': '#1f2937',
-                '--body-bg': '#e7f5e9',
-            },
-            'purple': {
-                '--primary-bg': '#7c3aed',
-                '--primary-hover': '#6d28d9',
-                '--secondary-bg': '#8b5cf6',
-                '--text-light': '#ffffff',
-                '--text-dark': '#1f2937',
-                '--body-bg': '#f3e8ff',
-            }
-        };
-
-        function applyTheme(themeName) {
-            const root = document.documentElement; // Target the :root pseudo-class for CSS variables
-            const body = document.body;
-            const selectedTheme = themes[themeName];
-
-            if (selectedTheme) {
-                for (const [property, value] of Object.entries(selectedTheme)) {
-                    root.style.setProperty(property, value);
-                }
-                body.setAttribute('data-theme', themeName); // Set data attribute on body
-                localStorage.setItem('selectedTheme', themeName); // Save theme preference
-            } else {
-                showMessage('Tema tidak ditemukan.');
-            }
-        }
-
-        // Function to update the profile thumbnail in the header
-        function updateHeaderProfileThumbnail() {
-            const headerProfilePhoto = document.getElementById('headerProfilePhoto');
-            const headerProfileIcon = document.getElementById('headerProfileIcon');
-
-            if (profileData.photo && profileData.photo !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
-                headerProfilePhoto.src = profileData.photo;
-                headerProfilePhoto.classList.remove('hidden');
-                headerProfileIcon.classList.add('hidden');
-            } else {
-                headerProfilePhoto.classList.add('hidden');
-                headerProfileIcon.classList.remove('hidden');
-            }
-        }
-
-        // Function to show/hide content sections
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.content-section');
+        // Fungsi untuk menampilkan bagian tertentu
+        function showSection(id) {
             sections.forEach(section => {
                 section.classList.add('hidden');
                 section.classList.remove('active-section');
             });
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.remove('hidden');
-                activeSection.classList.add('active-section');
-            }
-
-            // For Profil Guru section, load data when shown
-            if (sectionId === 'profilGuru') {
-                loadProfileData();
-            }
-            // For Modul Ajar section, render modules when shown
-            if (sectionId === 'modulAjar') {
-                renderModules();
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('active-section');
+            // Jika kembali ke home, gulir ke atas
+            if (id === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // Function to open link in new tab
-        // The iframe logic has been removed as it's unreliable for many external services.
-        function openLink(inputId) {
-            const inputElement = document.getElementById(inputId);
-            const url = inputElement.value;
-
-            if (url) {
-                window.open(url, '_blank');
+        // Fungsi untuk membuka tautan di tab baru, dengan konfirmasi untuk tautan kosong
+        async function openLink(inputId) {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            // Gunakan data externalLinks yang dimuat dari Firestore
+            const linkValue = externalLinks[inputId];
+            if (linkValue && linkValue.trim() !== '') {
+                window.open(linkValue, '_blank');
             } else {
-                showMessage('Mohon masukkan tautan terlebih dahulu.');
+                showMessage('Tidak ada tautan untuk dibuka. Silakan masukkan tautan terlebih dahulu.');
             }
         }
 
-        // Function to print a specific section of the page
-        function printSection(sectionId, linkInputId = null) {
-            const sectionToPrint = document.getElementById(sectionId);
-            if (!sectionToPrint) {
-                showMessage('Bagian untuk dicetak tidak ditemukan.');
+        // Fungsi untuk mencetak bagian atau membuka tautan untuk dicetak
+        async function printSection(sectionId, linkInputId = null) {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
                 return;
             }
 
-            // Specific handling for Modul Ajar section
-            if (sectionId === 'modulAjar') {
+            if (linkInputId) {
+                const linkValue = externalLinks[linkInputId];
+                if (linkValue && linkValue.trim() !== '') {
+                    window.open(linkValue, '_blank');
+                    showMessage('Dokumen akan dibuka di tab baru. Dari sana, Anda dapat mengunduhnya dalam format PDF atau format lain yang didukung Google Workspace (biasanya melalui menu File > Download).');
+                } else {
+                    showMessage('Tidak ada tautan dokumen untuk dicetak. Silakan masukkan tautan terlebih dahulu.');
+                }
+            } else {
+                // Untuk bagian tanpa tautan eksternal (misalnya, Profil, Modul Ajar)
+                const printContent = document.getElementById(sectionId).cloneNode(true);
+                // Hapus elemen yang tidak diperlukan untuk pencetakan (tombol, bidang input)
+                printContent.querySelectorAll('button, input, select, label').forEach(el => el.remove());
+                if (printContent.querySelector('p.text-lg')) {
+                    printContent.querySelector('p.text-lg').remove(); // Hapus deskripsi bagian
+                }
+                if (printContent.querySelector('i.fas.text-blue-600')) {
+                    printContent.querySelector('i.fas.text-blue-600').remove(); // Hapus ikon bagian
+                }
+                if (printContent.querySelector('h2')) {
+                    printContent.querySelector('h2').style.textAlign = 'center'; // Tengahkan judul untuk pencetakan
+                }
+                
+                // Untuk profilGuru, sesuaikan gambar dan perataan teks
+                if (sectionId === 'profilGuru') {
+                    const profilePhoto = printContent.querySelector('img#profilePhoto');
+                    if (profilePhoto) {
+                        profilePhoto.style.display = 'block';
+                        profilePhoto.style.margin = '0 auto';
+                    }
+                    printContent.querySelectorAll('div > label + input').forEach(input => {
+                        input.style.border = 'none';
+                        input.style.boxShadow = 'none';
+                        input.style.padding = '0';
+                        input.style.width = 'auto';
+                        input.style.display = 'inline';
+                        input.style.verticalAlign = 'baseline';
+                    });
+                     printContent.querySelectorAll('div > label').forEach(label => {
+                        label.style.display = 'inline';
+                        label.style.fontWeight = 'bold';
+                        label.style.marginRight = '5px';
+                    });
+                    const divElements = printContent.querySelectorAll('div.mb-4');
+                    divElements.forEach(div => {
+                        div.style.marginBottom = '10px';
+                        div.style.textAlign = 'left';
+                    });
+                     // Hapus div spesifik yang berisi tombol unggah/hapus
+                    const uploadPhotoDiv = printContent.querySelector('.mb-6.flex.flex-col.items-center');
+                    if (uploadPhotoDiv) {
+                        uploadPhotoDiv.remove();
+                    }
+                }
+                
+                // Untuk modulAjar, sederhanakan tampilan untuk pencetakan
+                if (sectionId === 'modulAjar') {
+                    const modulList = printContent.querySelector('#modulAjarList');
+                    if (modulList) {
+                        modulList.classList.remove('flex', 'flex-col', 'gap-4');
+                        modulList.classList.add('grid', 'grid-cols-1'); // Jadikan daftar sederhana untuk pencetakan
+                        modulList.style.textAlign = 'left';
+                        modulList.querySelectorAll('.modul-item').forEach(item => {
+                            item.classList.remove('flex', 'items-center', 'space-x-4');
+                            item.classList.add('flex', 'flex-col', 'mb-4', 'p-2', 'border', 'rounded');
+                            item.querySelector('.modul-inputs').classList.remove('flex-1', 'flex', 'flex-col', 'space-y-2');
+                            item.querySelector('.modul-actions').remove(); // Hapus tombol aksi
+                            item.querySelectorAll('label').forEach(label => {
+                                label.style.fontWeight = 'bold';
+                                label.style.marginRight = '5px';
+                                label.style.display = 'inline';
+                            });
+                            item.querySelectorAll('input').forEach(input => {
+                                input.style.border = 'none';
+                                input.style.boxShadow = 'none';
+                                input.style.padding = '0';
+                                input.style.width = 'auto';
+                                input.style.display = 'inline';
+                                input.style.verticalAlign = 'baseline';
+                            });
+                            const subjectInput = item.querySelector(`input[id^="subject"]`);
+                            const linkInput = item.querySelector(`input[id^="link"]`);
+                            
+                            const subjectDiv = document.createElement('div');
+                            subjectDiv.innerHTML = `<strong>Mata Pelajaran:</strong> ${subjectInput ? subjectInput.value : ''}`;
+                            
+                            const linkDiv = document.createElement('div');
+                            linkDiv.innerHTML = `<strong>Tautan:</strong> <a href="${linkInput ? linkInput.value : '#'}" target="_blank">${linkInput ? linkInput.value : ''}</a>`;
+                            
+                            item.innerHTML = ''; // Hapus konten sebelumnya
+                            item.appendChild(subjectDiv);
+                            item.appendChild(linkDiv);
+                        });
+                    }
+                }
+
+
                 const printWindow = window.open('', '_blank');
-                printWindow.document.write('<html><head><title>Cetak Dokumen Modul Ajar</title>');
-                printWindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />');
-                printWindow.document.write('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
-                printWindow.document.write('<style>');
+                printWindow.document.open();
                 printWindow.document.write(`
-                    body { font-family: 'Inter', sans-serif; margin: 20px; }
-                    h2 { font-size: 24px; font-weight: bold; margin-bottom: 20px; text-align: center; }
-                    .module-list { list-style: none; padding: 0; }
-                    .module-item-print {
-                        border: 1px solid #eee;
-                        padding: 15px;
-                        margin-bottom: 10px;
-                        border-radius: 8px;
-                        background-color: #f9f9f9;
-                    }
-                    .module-item-print h3 { font-size: 18px; font-weight: bold; margin-bottom: 5px; color: #333; }
-                    .module-item-print p { font-size: 14px; color: #555; margin-bottom: 3px; word-break: break-all; }
-                `);
-                printWindow.document.write('</style></head><body>');
-                printWindow.document.write('<h2>Daftar Modul Ajar</h2>');
-                printWindow.document.write('<ul class="module-list">');
-                modulesData.forEach(module => {
-                    if (module.subject || module.link) { // Only print if there's data
-                        printWindow.document.write(`
-                            <li class="module-item-print">
-                                <h3>Mata Pelajaran: ${module.subject || 'Belum Diisi'}</h3>
-                                <p>Link Modul: <a href="${module.link}" target="_blank">${module.link || 'Tidak Ada Link'}</a></p>
-                            </li>
-                        `);
-                    }
-                });
-                printWindow.document.write('</ul>');
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();
-                printWindow.print();
-                return;
-            }
-
-            // For other sections (general handling)
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>Cetak Dokumen</title>');
-            // Copy relevant styles for better print output
-            printWindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />');
-            printWindow.document.write('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
-            printWindow.document.write('<style>');
-            printWindow.document.write(`
-                body { font-family: 'Inter', sans-serif; margin: 20px; }
-                h2 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
-                p { margin-bottom: 10px; }
-                .print-content {
-                    border: 1px solid #ccc;
-                    padding: 20px;
-                    border-radius: 8px;
-                    background-color: #fff;
-                }
-                .mb-4 { margin-bottom: 1rem; }
-                .font-bold { font-weight: bold; }
-                .text-gray-700 { color: #4a5568; }
-                /* Hide buttons and inputs for printing */
-                button, input[type="text"], input[type="email"], input[type="file"] {
-                    display: none !important;
-                }
-                label { display: block; } /* Ensure labels are visible */
+                    <!DOCTYPE html>
+                    <html lang="id">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Cetak Dokumen - Sigma Edu</title>
+                        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+                        <style>
+                            body { font-family: 'Inter', sans-serif; margin: 20px; }
+                            h1, h2, h3 { color: #1f2937; text-align: center; margin-bottom: 20px; }
+                            p { color: #4b5563; line-height: 1.6; }
+                            img { max-width: 100%; height: auto; display: block; margin-bottom: 20px; }
+                            .modul-item { border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px; }
+                        </style>
+                </head>
+                <body>
+                    ${printContent.innerHTML}
+                </body>
+                </html>
             `);
-            printWindow.document.write('</style></head><body>');
-            printWindow.document.write('<div class="print-content">');
-
-            // Clone the section and prepare for printing
-            const clonedSection = sectionToPrint.cloneNode(true);
-
-            // Remove the back button for printing
-            const backButton = clonedSection.querySelector('.absolute.top-4.left-4');
-            if (backButton) {
-                backButton.remove();
-            }
-
-            // For profile section, display values as text
-            if (sectionId === 'profilGuru') {
-                const profilePhoto = clonedSection.querySelector('#profilePhoto');
-                if (profilePhoto && profilePhoto.src && profilePhoto.src !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
-                     const photoDiv = document.createElement('div');
-                     photoDiv.innerHTML = `<h3 class="font-bold text-gray-700 mb-2 text-center">Foto Profil:</h3><img src="${profilePhoto.src}" style="width:150px; height:150px; border-radius:50%; object-fit:cover; margin: 0 auto 20px;">`;
-                     clonedSection.prepend(photoDiv);
-                }
-
-                const inputs = clonedSection.querySelectorAll('input');
-                inputs.forEach(input => {
-                    if (input.type !== 'file') { // Exclude file input from cloning text
-                        const label = input.previousElementSibling;
-                        const p = document.createElement('p');
-                        p.innerHTML = `<span class="font-bold text-gray-700">${label ? label.textContent : ''}</span> ${input.value}`;
-                        input.parentNode.replaceChild(p, input);
-                    } else {
-                        input.remove(); // Remove the file input itself
-                    }
-                });
-            }
-
-
-            printWindow.document.write(clonedSection.innerHTML);
-            printWindow.document.write('</div></body></html>');
             printWindow.document.close();
             printWindow.print();
         }
+    }
 
-        // --- Profil Guru Specific Functions ---
+        // --- Pemuatan dan Pendengar Data Firebase ---
+
+        // Fungsi untuk memuat semua data pengguna dari Firestore
+        async function loadAllUserData() {
+            if (!isFirebaseReady) {
+                console.warn("DEBUG: Firebase belum siap untuk memuat data.");
+                return;
+            }
+            try {
+                console.log("DEBUG: Memuat data profil dan tema...");
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
+                const profileDocSnap = await getDoc(profileDocRef);
+                if (profileDocSnap.exists()) {
+                    const data = profileDocSnap.data();
+                    profileData = {
+                        nama: data.nama || '[Nama Guru]',
+                        nip: data.nip || '[NIP]',
+                        email: data.email || '[Email]',
+                        nomorWA: data.nomorWA || '[Nomor WA]',
+                        photo: data.photo || ''
+                    };
+                    currentTheme = data.theme || 'default';
+                    console.log("DEBUG: Data profil dimuat:", profileData);
+                    console.log("DEBUG: Tema dimuat:", currentTheme);
+                } else {
+                    console.log("DEBUG: Dokumen profil tidak ditemukan, menggunakan data default.");
+                }
+                loadProfileData(); // Perbarui UI dengan profil yang dimuat
+                applyTheme(currentTheme); // Terapkan tema yang dimuat
+                document.getElementById('themeSelect').value = currentTheme;
+
+                console.log("DEBUG: Memuat tautan eksternal...");
+                const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
+                const linksDocSnap = await getDoc(linksDocRef);
+                if (linksDocSnap.exists()) {
+                    externalLinks = linksDocSnap.data();
+                    console.log("DEBUG: Tautan eksternal dimuat:", externalLinks);
+                    // Isi bidang input dengan tautan yang dimuat
+                    for (const key in externalLinks) {
+                        const inputElement = document.getElementById(key);
+                        if (inputElement) {
+                            inputElement.value = externalLinks[key];
+                        }
+                    }
+                } else {
+                    console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, menggunakan data kosong.");
+                    externalLinks = {}; // Reset jika dokumen tidak ada
+                }
+
+            } catch (error) {
+                console.error("DEBUG: Error in loadAllUserData:", error);
+                showMessage("Gagal memuat data. Mohon coba lagi atau masukkan data jika ini adalah pertama kali.");
+            }
+        }
+
+        // Siapkan pendengar real-time untuk modul
+        function setupRealtimeListeners() {
+            if (!isFirebaseReady) {
+                console.warn("DEBUG: Firebase belum siap, tidak dapat menyiapkan pendengar real-time.");
+                return;
+            }
+
+            console.log("DEBUG: Menyiapkan pendengar modul...");
+            const modulesCollectionRef = collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules');
+            onSnapshot(modulesCollectionRef, (snapshot) => {
+                const updatedModules = [];
+                snapshot.forEach(doc => {
+                    updatedModules.push({ id: doc.id, ...doc.data() });
+                });
+                modulesData = updatedModules;
+                renderModules(); // Render ulang modul setiap kali data berubah di Firestore
+                console.log("DEBUG: Modul diperbarui secara real-time:", modulesData);
+            }, (error) => {
+                console.error("DEBUG: Kesalahan saat mendengarkan modul:", error);
+                showMessage("Gagal memuat modul ajar secara real-time.");
+            });
+
+             console.log("DEBUG: Menyiapkan pendengar tautan eksternal...");
+            const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
+            onSnapshot(linksDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    externalLinks = docSnap.data();
+                    console.log("DEBUG: Tautan eksternal diperbarui secara real-time:", externalLinks);
+                    // Perbarui bidang input yang relevan
+                    for (const key in externalLinks) {
+                        const inputElement = document.getElementById(key);
+                        if (inputElement) {
+                            inputElement.value = externalLinks[key];
+                        }
+                    }
+                } else {
+                    console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, mereset data.");
+                    externalLinks = {}; // Reset jika dokumen tidak ada
+                }
+            }, (error) => {
+                console.error("DEBUG: Kesalahan saat mendengarkan tautan eksternal:", error);
+                showMessage("Gagal memuat tautan eksternal secara real-time.");
+            });
+
+            console.log("DEBUG: Menyiapkan pendengar profil dan pengaturan...");
+            const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
+            onSnapshot(profileDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    profileData = {
+                        nama: data.nama || '[Nama Guru]',
+                        nip: data.nip || '[NIP]',
+                        email: data.email || '[Email]',
+                        nomorWA: data.nomorWA || '[Nomor WA]',
+                        photo: data.photo || ''
+                    };
+                    currentTheme = data.theme || 'default';
+                    loadProfileData(); // Perbarui UI profil
+                    applyTheme(currentTheme); // Terapkan tema
+                    document.getElementById('themeSelect').value = currentTheme;
+                    console.log("DEBUG: Profil dan pengaturan diperbarui secara real-time:", profileData, currentTheme);
+                } else {
+                    console.log("DEBUG: Dokumen profil dan pengaturan tidak ditemukan, menggunakan data default.");
+                }
+            }, (error) => {
+                console.error("DEBUG: Kesalahan saat mendengarkan profil dan pengaturan:", error);
+                showMessage("Gagal memuat profil dan pengaturan secara real-time.");
+            });
+        }
+
+
+        // --- Manajemen Profil ---
         function loadProfileData() {
             document.getElementById('namaGuru').value = profileData.nama;
             document.getElementById('nipGuru').value = profileData.nip;
             document.getElementById('emailGuru').value = profileData.email;
             document.getElementById('nomorWAGuru').value = profileData.nomorWA;
-            document.getElementById('profilePhoto').src = profileData.photo;
-            setProfileFieldsDisabled(true); // Ensure fields are disabled by default
-            document.getElementById('editProfilBtn').classList.remove('hidden');
-            document.getElementById('simpanProfilBtn').classList.add('hidden');
-            // Show/hide delete photo button based on whether a custom photo is loaded
-            if (profileData.photo !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
-                document.getElementById('deletePhotoBtn').classList.remove('hidden');
+
+            const profilePhoto = document.getElementById('profilePhoto');
+            const deletePhotoBtn = document.getElementById('deletePhotoBtn');
+            const headerProfilePhoto = document.getElementById('headerProfilePhoto');
+            const headerProfileIcon = document.getElementById('headerProfileIcon');
+
+            if (profileData.photo) {
+                profilePhoto.src = profileData.photo;
+                profilePhoto.classList.remove('hidden');
+                deletePhotoBtn.classList.remove('hidden');
+                headerProfilePhoto.src = profileData.photo;
+                headerProfilePhoto.classList.remove('hidden');
+                headerProfileIcon.classList.add('hidden');
             } else {
-                document.getElementById('deletePhotoBtn').classList.add('hidden');
+                profilePhoto.src = defaultProfilePhoto;
+                profilePhoto.classList.remove('hidden'); // Pastikan placeholder terlihat
+                deletePhotoBtn.classList.add('hidden');
+                headerProfilePhoto.classList.add('hidden');
+                headerProfileIcon.classList.remove('hidden');
             }
-            updateHeaderProfileThumbnail(); // Update header thumbnail when profile data is loaded/changed
         }
 
-        function setProfileFieldsDisabled(disabled) {
-            document.getElementById('namaGuru').disabled = disabled;
-            document.getElementById('nipGuru').disabled = disabled;
-            document.getElementById('emailGuru').disabled = disabled;
-            document.getElementById('nomorWAGuru').disabled = disabled;
+        async function saveProfileData() {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            try {
+                profileData.nama = document.getElementById('namaGuru').value;
+                profileData.nip = document.getElementById('nipGuru').value;
+                profileData.email = document.getElementById('emailGuru').value;
+                profileData.nomorWA = document.getElementById('nomorWAGuru').value;
+
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
+                await setDoc(profileDocRef, profileData, { merge: true }); // Gabungkan untuk memperbarui hanya bidang yang berubah
+                showMessage('Profil berhasil disimpan!');
+            } catch (error) {
+                console.error("DEBUG: Error saving profile data:", error);
+                showMessage("Gagal menyimpan profil. Mohon coba lagi.");
+            }
         }
 
-        document.getElementById('editProfilBtn').addEventListener('click', function() {
-            setProfileFieldsDisabled(false);
-            this.classList.add('hidden');
-            document.getElementById('simpanProfilBtn').classList.remove('hidden');
+        function toggleProfileEdit(enable) {
+            const inputs = ['namaGuru', 'nipGuru', 'emailGuru', 'nomorWAGuru'];
+            inputs.forEach(id => {
+                document.getElementById(id).disabled = !enable;
+            });
+
+            document.getElementById('editProfilBtn').classList.toggle('hidden', enable);
+            document.getElementById('simpanProfilBtn').classList.toggle('hidden', !enable);
+        }
+
+        document.getElementById('editProfilBtn').addEventListener('click', () => {
+            toggleProfileEdit(true);
         });
 
-        document.getElementById('simpanProfilBtn').addEventListener('click', function() {
-            profileData.nama = document.getElementById('namaGuru').value;
-            profileData.nip = document.getElementById('nipGuru').value;
-            profileData.email = document.getElementById('emailGuru').value;
-            profileData.nomorWA = document.getElementById('nomorWAGuru').value;
-            setProfileFieldsDisabled(true);
-            this.classList.add('hidden');
-            document.getElementById('editProfilBtn').classList.remove('hidden');
-            updateHeaderProfileThumbnail(); // Update header thumbnail after saving profile
-            showMessage('Profil berhasil diperbarui!');
-            showSection('home'); // Kembali ke beranda setelah simpan
+        document.getElementById('simpanProfilBtn').addEventListener('click', async () => {
+            await saveProfileData();
+            toggleProfileEdit(false);
         });
 
-        // Photo upload functionality
-        document.getElementById('uploadPhoto').addEventListener('change', function(event) {
+        document.getElementById('uploadPhoto').addEventListener('change', async (event) => {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profilePhoto').src = e.target.result;
-                    profileData.photo = e.target.result; // Store base64 string
-                    document.getElementById('deletePhotoBtn').classList.remove('hidden');
-                    updateHeaderProfileThumbnail(); // Update header thumbnail after uploading photo
-                    showMessage('Foto berhasil diunggah!');
+                reader.onload = async (e) => {
+                    profileData.photo = e.target.result;
+                    await saveProfileData(); // Simpan dengan foto baru
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        document.getElementById('deletePhotoBtn').addEventListener('click', function() {
-            if (confirm('Apakah Anda yakin ingin menghapus foto profil?')) { // Using confirm here, as per previous iterations
-                document.getElementById('profilePhoto').src = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto"; // Reset to placeholder
-                profileData.photo = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto";
-                this.classList.add('hidden'); // Hide delete button
-                updateHeaderProfileThumbnail(); // Update header thumbnail after deleting photo
-                showMessage('Foto profil berhasil dihapus!');
-            }
+        document.getElementById('deletePhotoBtn').addEventListener('click', async () => {
+            profileData.photo = ''; // Hapus foto
+            await saveProfileData(); // Simpan perubahan
+            showMessage('Foto profil berhasil dihapus.');
         });
 
-        // --- Modul Ajar Specific Functions ---
+        // --- Manajemen Modul Ajar ---
         function renderModules() {
-            const container = document.getElementById('modulAjarList');
-            container.innerHTML = ''; // Clear existing modules
+            const modulAjarList = document.getElementById('modulAjarList');
+            modulAjarList.innerHTML = ''; // Hapus daftar yang ada
 
-            modulesData.forEach((module, index) => {
-                const moduleDiv = document.createElement('div');
-                moduleDiv.classList.add('module-item', 'bg-gray-50', 'p-4', 'rounded-lg', 'shadow-sm', 'mb-4', 'w-full');
-                moduleDiv.innerHTML = `
-                    <div class="mb-2">
-                        <label class="block text-gray-700 text-sm font-bold mb-1 text-left">Mata Pelajaran:</label>
-                        <input type="text" class="subject-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="${module.subject}" disabled>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-1 text-left">Link Modul Ajar:</label>
-                        <div class="flex items-center space-x-2">
-                            <input type="text" class="link-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan tautan Google Docs/Drive modul ajar" value="${module.link}" disabled>
-                            <button class="open-doc-btn bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
-                                <i class="fas fa-external-link-alt w-4 h-4"></i>
-                                <span>Buka Dokumen</span>
-                            </button>
+            if (modulesData.length === 0) {
+                modulAjarList.innerHTML = '<p class="text-gray-600 text-center">Belum ada modul ajar yang ditambahkan.</p>';
+            }
+
+            modulesData.forEach((modul, index) => {
+                const modulItem = document.createElement('div');
+                modulItem.className = 'modul-item bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4';
+                modulItem.innerHTML = `
+                    <div class="modul-inputs flex-1 flex flex-col space-y-2 w-full">
+                        <div>
+                            <label for="subject${modul.id}" class="block text-gray-700 text-sm font-bold mb-1 text-left">Mata Pelajaran:</label>
+                            <input type="text" id="subject${modul.id}" value="${modul.subject}" placeholder="Contoh: Matematika" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updateModule('${modul.id}', 'subject', this.value)">
+                        </div>
+                        <div>
+                            <label for="link${modul.id}" class="block text-gray-700 text-sm font-bold mb-1 text-left">Link Modul Ajar:</label>
+                            <input type="text" id="link${modul.id}" value="${modul.link}" placeholder="Contoh: https://docs.google.com/document/d/e/..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updateModule('${modul.id}', 'link', this.value)">
                         </div>
                     </div>
-                    <div class="flex flex-wrap justify-center sm:justify-end gap-2">
-                        <button class="edit-module-btn bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
-                            <i class="fas fa-edit"></i>
-                            <span>Edit/Ubah</span>
+                    <div class="modul-actions flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mt-3 sm:mt-0">
+                        <button onclick="openModuleLinkById('${modul.id}')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Buka Dokumen</span>
                         </button>
-                        <button class="save-module-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105 hidden">
-                            <i class="fas fa-save"></i>
-                            <span>Simpan</span>
-                        </button>
-                        <button class="delete-module-btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
-                            <i class="fas fa-trash-alt"></i>
+                        <!-- Penjelasan: Perubahan pada input di atas disimpan secara otomatis. -->
+                        <button onclick="deleteModule('${modul.id}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <button class="download-pdf-btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
-                            <i class="fas fa-download"></i>
-                            <span>Download PDF</span>
                         </button>
                     </div>
                 `;
-                container.appendChild(moduleDiv);
-
-                const subjectInput = moduleDiv.querySelector('.subject-input');
-                const linkInput = moduleDiv.querySelector('.link-input');
-                const openDocBtn = moduleDiv.querySelector('.open-doc-btn');
-                const editBtn = moduleDiv.querySelector('.edit-module-btn');
-                const saveBtn = moduleDiv.querySelector('.save-module-btn');
-                const deleteBtn = moduleDiv.querySelector('.delete-module-btn');
-                const downloadPdfBtn = moduleDiv.querySelector('.download-pdf-btn');
-
-                editBtn.addEventListener('click', () => {
-                    subjectInput.disabled = false;
-                    linkInput.disabled = false;
-                    editBtn.classList.add('hidden');
-                    saveBtn.classList.remove('hidden');
-                });
-
-                saveBtn.addEventListener('click', () => {
-                    modulesData[index].subject = subjectInput.value;
-                    modulesData[index].link = linkInput.value;
-                    subjectInput.disabled = true;
-                    linkInput.disabled = true;
-                    editBtn.classList.remove('hidden');
-                    saveBtn.classList.add('hidden');
-                    showMessage('Modul berhasil diperbarui!');
-                });
-
-                deleteBtn.addEventListener('click', () => {
-                    if (confirm('Apakah Anda yakin ingin menghapus modul ini?')) { // Using confirm here, as per previous iterations
-                        modulesData.splice(index, 1);
-                        renderModules(); // Re-render the list
-                        showMessage('Modul berhasil dihapus!');
-                    }
-                });
-
-                openDocBtn.addEventListener('click', () => {
-                    if (linkInput.value) {
-                        window.open(linkInput.value, '_blank');
-                    } else {
-                        showMessage('Tidak ada tautan modul ajar untuk dibuka.');
-                    }
-                });
-
-                downloadPdfBtn.addEventListener('click', () => {
-                    if (linkInput.value) {
-                        // For Google Workspace links, direct download is not possible via client-side JS.
-                        // We instruct the user to download it from the opened tab.
-                        window.open(linkInput.value, '_blank');
-                        showMessage('Dokumen akan dibuka di tab baru. Dari sana, Anda dapat mengunduhnya dalam format PDF atau format lain yang didukung Google Workspace (biasanya melalui menu File > Download).');
-                    } else {
-                        showMessage('Tidak ada tautan modul ajar untuk diunduh.');
-                    }
-                });
+                modulAjarList.appendChild(modulItem);
             });
         }
 
-        document.getElementById('addModuleBtn').addEventListener('click', () => {
+        async function updateModule(id, field, value) {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            try {
+                const moduleDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules', id);
+                await setDoc(moduleDocRef, { [field]: value }, { merge: true });
+                showMessage('Modul ajar berhasil diperbarui.');
+            } catch (error) {
+                console.error("DEBUG: Error updating module:", error);
+                showMessage("Gagal memperbarui modul ajar. Mohon coba lagi.");
+            }
+        }
+
+        async function deleteModule(id) {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            try {
+                const moduleDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules', id);
+                await deleteDoc(moduleDocRef);
+                showMessage('Modul ajar berhasil dihapus.');
+            } catch (error) {
+                console.error("DEBUG: Error deleting module:", error);
+                showMessage("Gagal menghapus modul ajar. Mohon coba lagi.");
+            }
+        }
+
+        function openModuleLinkById(id) {
+            const module = modulesData.find(m => m.id === id);
+            if (module && module.link.trim() !== '') {
+                window.open(module.link, '_blank');
+                showMessage('Dokumen akan dibuka di tab baru. Dari sana, Anda dapat mengunduhnya dalam format PDF atau format lain yang didukung Google Workspace (biasanya melalui menu File > Download).');
+            } else {
+                showMessage('Tidak ada tautan modul ajar untuk diunduh.');
+            }
+        }
+
+        document.getElementById('addModuleBtn').addEventListener('click', async () => {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
             if (modulesData.length < MAX_MODULES) {
-                modulesData.push({ subject: '', link: '' });
-                renderModules();
+                try {
+                    const newModule = { subject: '', link: '' };
+                    const docRef = await addDoc(collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules'), newModule);
+                    console.log("DEBUG: Document written with ID: ", docRef.id);
+                    showMessage('Modul ajar baru ditambahkan!');
+                } catch (e) {
+                    console.error("DEBUG: Error adding document: ", e);
+                    showMessage("Gagal menambahkan modul ajar. Mohon coba lagi.");
+                }
             } else {
                 showMessage(`Anda telah mencapai batas maksimum ${MAX_MODULES} modul ajar.`);
             }
         });
 
-        // Event listener for settings button
+        document.getElementById('fill8ModulesBtn').addEventListener('click', async () => {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            const modulesToAdd = 8 - modulesData.length;
+            if (modulesToAdd > 0) {
+                let addedCount = 0;
+                for (let i = 0; i < modulesToAdd && (modulesData.length + addedCount) < MAX_MODULES; i++) {
+                    try {
+                        const newModule = { subject: '', link: '' };
+                        await addDoc(collection(db, 'artifacts', appIdForFirestore, 'users', userId, 'modules'), newModule);
+                        addedCount++;
+                    } catch (e) {
+                        console.error("DEBUG: Error adding document during fill:", e);
+                        showMessage("Gagal menambahkan beberapa modul ajar. Mohon coba lagi.");
+                        break; // Hentikan jika ada kesalahan
+                    }
+                }
+                if (addedCount > 0) {
+                    showMessage(`${addedCount} modul ajar kosong berhasil ditambahkan.`);
+                } else {
+                    showMessage('Tidak ada modul kosong yang bisa ditambahkan lagi (sudah mencapai 8 atau batas maksimum).');
+                }
+            } else {
+                showMessage('Anda sudah memiliki 8 modul ajar atau lebih.');
+            }
+        });
+
+
+        // --- Manajemen Tautan Eksternal ---
+        async function saveExternalLink(inputId, value) {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            try {
+                const linksDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'externalLinks');
+                await setDoc(linksDocRef, { [inputId]: value }, { merge: true });
+                externalLinks[inputId] = value; // Perbarui status lokal segera
+                console.log(`DEBUG: Tautan untuk ${inputId} disimpan.`);
+            } catch (error) {
+                console.error(`DEBUG: Error saving link for ${inputId}:`, error);
+                showMessage(`Gagal menyimpan tautan untuk ${inputId}.`);
+            }
+        }
+
+        // Tambahkan event listener untuk bidang input tautan eksternal
+        const linkInputs = ['jadwalLink', 'dataSiswaLink', 'daftarHadirLink', 'programSemesterLink', 'kalenderLink', 'asesmenLink', 'karyaInovatifLink', 'riwayatPelatihanLink', 'programKerjaGuruLink'];
+        linkInputs.forEach(id => {
+            const inputElement = document.getElementById(id);
+            if (inputElement) {
+                inputElement.addEventListener('change', (event) => {
+                    saveExternalLink(id, event.target.value);
+                });
+            }
+        });
+
+        // --- Pengaturan Tema ---
+        const themeSelect = document.getElementById('themeSelect');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+
+        function applyTheme(theme) {
+            document.body.dataset.theme = theme;
+        }
+
+        themeSelect.addEventListener('change', async (event) => {
+            const selectedTheme = event.target.value;
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            try {
+                const profileDocRef = doc(db, 'artifacts', appIdForFirestore, 'users', userId, 'settings', 'profileAndSettings');
+                await setDoc(profileDocRef, { theme: selectedTheme }, { merge: true });
+                currentTheme = selectedTheme; // Perbarui status lokal
+                applyTheme(selectedTheme);
+                showMessage('Tema berhasil disimpan!');
+            } catch (error) {
+                console.error("DEBUG: Error saving theme:", error);
+                showMessage("Gagal menyimpan tema. Mohon coba lagi.");
+            }
+        });
+
+        saveSettingsBtn.addEventListener('click', async () => {
+            // Perubahan tema sudah ditangani oleh event listener 'change' pada themeSelect
+            // Tombol ini dapat digunakan untuk pengaturan lain jika ditambahkan nanti, atau hanya untuk konfirmasi.
+            showMessage('Pengaturan berhasil disimpan!');
+        });
+
+
+        // Event listener untuk tombol pengaturan
         document.getElementById('settingsBtn').addEventListener('click', function() {
             showSection('pengaturan');
         });
 
-        // Show home page and initialize header thumbnail when the application is loaded
+        // Penyiapan awal
         document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('customModal').classList.add('hidden'); // Pastikan modal tersembunyi saat dimuat
+            initializeFirebase(); // Mulai inisialisasi dan autentikasi Firebase
             showSection('home');
-            updateHeaderProfileThumbnail(); // Initial load of header thumbnail
-
-            // Load saved theme on startup
-            const savedTheme = localStorage.getItem('selectedTheme') || 'default';
-            applyTheme(savedTheme);
         });
     </script>
 </body>
