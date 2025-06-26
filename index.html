@@ -488,11 +488,17 @@
                     <!-- Item modul akan dirender di sini oleh JavaScript -->
                 </div>
 
-                <button id="addModuleBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-6 transition duration-300 ease-in-out transform hover:scale-105">
-                    <i class="fas fa-plus"></i>
-                    <span>Tambah Modul Ajar</span>
-                </button>
-
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <button id="addModuleBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-plus"></i>
+                        <span>Tambah Modul Ajar</span>
+                    </button>
+                    <button id="fill8ModulesBtn" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-th-large"></i>
+                        <span>Isi 8 Modul Kosong</span>
+                    </button>
+                </div>
+                
                 <button onclick="printSection('modulAjar')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
@@ -712,33 +718,33 @@
         import { getFirestore, doc, getDoc, setDoc, collection, query, onSnapshot, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const sections = document.querySelectorAll('.content-section');
-        const MAX_MODULES = 10;
-        let modulesData = []; // Will be populated by Firestore listener
+        const MAX_MODULES = 10; // Batas maksimum modul ajar
+        let modulesData = []; // Akan diisi oleh listener Firestore
         let profileData = {
             nama: '[Nama Guru]',
             nip: '[NIP]',
             email: '[Email]',
             nomorWA: '[Nomor WA]',
-            photo: '' // Base64 string for photo
+            photo: '' // String Base64 untuk foto
         };
-        let externalLinks = {}; // Will be populated by Firestore
-        let currentTheme = 'default'; // Will be populated by Firestore
+        let externalLinks = {}; // Akan diisi oleh Firestore
+        let currentTheme = 'default'; // Akan diisi oleh Firestore
 
-        const defaultProfilePhoto = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto"; // Placeholder image
+        const defaultProfilePhoto = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto"; // Placeholder gambar
 
-        // Global Firebase variables
+        // Variabel global Firebase
         let app;
         let db;
         let auth;
-        let userId = 'anonymous'; // Default or temporary userId
+        let userId = 'anonymous'; // userId default atau sementara
         let isFirebaseReady = false;
 
-        // Firebase Config (provided by Canvas environment)
+        // Konfigurasi Firebase (disediakan oleh lingkungan Canvas)
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // Initialize Firebase
+        // Inisialisasi Firebase
         async function initializeFirebase() {
             try {
                 console.log("DEBUG: Memulai inisialisasi Firebase...");
@@ -785,30 +791,30 @@
             }
         }
 
-        // Function to show custom message modal
+        // Fungsi untuk menampilkan modal pesan kustom
         function showMessage(message) {
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('customModal').classList.remove('hidden');
         }
 
-        // --- Expose functions to global scope ---
-        // These functions are called directly from HTML onclick attributes,
-        // so they need to be accessible globally.
+        // --- Paparkan fungsi ke lingkup global ---
+        // Fungsi-fungsi ini dipanggil langsung dari atribut onclick HTML,
+        // jadi mereka perlu diakses secara global.
         window.showMessage = showMessage;
         window.showSection = showSection;
         window.openLink = openLink;
         window.printSection = printSection;
-        window.updateModule = updateModule; // Used in Modul Ajar inputs
-        window.deleteModule = deleteModule; // Used in Modul Ajar buttons
-        window.openModuleLinkById = openModuleLinkById; // Used in Modul Ajar buttons
+        window.updateModule = updateModule; // Digunakan dalam input Modul Ajar
+        window.deleteModule = deleteModule; // Digunakan dalam tombol Modul Ajar
+        window.openModuleLinkById = openModuleLinkById; // Digunakan dalam tombol Modul Ajar
 
 
-        // Function to hide custom message modal
+        // Fungsi untuk menyembunyikan modal pesan kustom
         document.getElementById('modalCloseBtn').addEventListener('click', () => {
             document.getElementById('customModal').classList.add('hidden');
         });
 
-        // Function to show a specific section
+        // Fungsi untuk menampilkan bagian tertentu
         function showSection(id) {
             sections.forEach(section => {
                 section.classList.add('hidden');
@@ -816,19 +822,19 @@
             });
             document.getElementById(id).classList.remove('hidden');
             document.getElementById(id).classList.add('active-section');
-            // If returning to home, scroll to top
+            // Jika kembali ke home, gulir ke atas
             if (id === 'home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // Function to open link in new tab, with confirmation for empty link
+        // Fungsi untuk membuka tautan di tab baru, dengan konfirmasi untuk tautan kosong
         async function openLink(inputId) {
             if (!isFirebaseReady) {
                 showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
                 return;
             }
-            // Use externalLinks data loaded from Firestore
+            // Gunakan data externalLinks yang dimuat dari Firestore
             const linkValue = externalLinks[inputId];
             if (linkValue && linkValue.trim() !== '') {
                 window.open(linkValue, '_blank');
@@ -837,7 +843,7 @@
             }
         }
 
-        // Function to print a section or open a link for printing
+        // Fungsi untuk mencetak bagian atau membuka tautan untuk dicetak
         async function printSection(sectionId, linkInputId = null) {
             if (!isFirebaseReady) {
                 showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
@@ -853,21 +859,21 @@
                     showMessage('Tidak ada tautan dokumen untuk dicetak. Silakan masukkan tautan terlebih dahulu.');
                 }
             } else {
-                // For sections without external links (e.g., Profile, Modul Ajar)
+                // Untuk bagian tanpa tautan eksternal (misalnya, Profil, Modul Ajar)
                 const printContent = document.getElementById(sectionId).cloneNode(true);
-                // Remove elements not needed for printing (buttons, input fields)
+                // Hapus elemen yang tidak diperlukan untuk pencetakan (tombol, bidang input)
                 printContent.querySelectorAll('button, input, select, label').forEach(el => el.remove());
                 if (printContent.querySelector('p.text-lg')) {
-                    printContent.querySelector('p.text-lg').remove(); // Remove section description
+                    printContent.querySelector('p.text-lg').remove(); // Hapus deskripsi bagian
                 }
                 if (printContent.querySelector('i.fas.text-blue-600')) {
-                    printContent.querySelector('i.fas.text-blue-600').remove(); // Remove section icon
+                    printContent.querySelector('i.fas.text-blue-600').remove(); // Hapus ikon bagian
                 }
                 if (printContent.querySelector('h2')) {
-                    printContent.querySelector('h2').style.textAlign = 'center'; // Center the title for printing
+                    printContent.querySelector('h2').style.textAlign = 'center'; // Tengahkan judul untuk pencetakan
                 }
                 
-                // For profilGuru, adjust image and text alignment
+                // Untuk profilGuru, sesuaikan gambar dan perataan teks
                 if (sectionId === 'profilGuru') {
                     const profilePhoto = printContent.querySelector('img#profilePhoto');
                     if (profilePhoto) {
@@ -892,25 +898,25 @@
                         div.style.marginBottom = '10px';
                         div.style.textAlign = 'left';
                     });
-                     // Remove the specific div containing upload/delete buttons
+                     // Hapus div spesifik yang berisi tombol unggah/hapus
                     const uploadPhotoDiv = printContent.querySelector('.mb-6.flex.flex-col.items-center');
                     if (uploadPhotoDiv) {
                         uploadPhotoDiv.remove();
                     }
                 }
                 
-                // For modulAjar, simplify display for printing
+                // Untuk modulAjar, sederhanakan tampilan untuk pencetakan
                 if (sectionId === 'modulAjar') {
                     const modulList = printContent.querySelector('#modulAjarList');
                     if (modulList) {
                         modulList.classList.remove('flex', 'flex-col', 'gap-4');
-                        modulList.classList.add('grid', 'grid-cols-1'); // Make it a simple list for printing
+                        modulList.classList.add('grid', 'grid-cols-1'); // Jadikan daftar sederhana untuk pencetakan
                         modulList.style.textAlign = 'left';
                         modulList.querySelectorAll('.modul-item').forEach(item => {
                             item.classList.remove('flex', 'items-center', 'space-x-4');
                             item.classList.add('flex', 'flex-col', 'mb-4', 'p-2', 'border', 'rounded');
                             item.querySelector('.modul-inputs').classList.remove('flex-1', 'flex', 'flex-col', 'space-y-2');
-                            item.querySelector('.modul-actions').remove(); // Remove action buttons
+                            item.querySelector('.modul-actions').remove(); // Hapus tombol aksi
                             item.querySelectorAll('label').forEach(label => {
                                 label.style.fontWeight = 'bold';
                                 label.style.marginRight = '5px';
@@ -933,7 +939,7 @@
                             const linkDiv = document.createElement('div');
                             linkDiv.innerHTML = `<strong>Tautan:</strong> <a href="${linkInput ? linkInput.value : '#'}" target="_blank">${linkInput ? linkInput.value : ''}</a>`;
                             
-                            item.innerHTML = ''; // Clear previous content
+                            item.innerHTML = ''; // Hapus konten sebelumnya
                             item.appendChild(subjectDiv);
                             item.appendChild(linkDiv);
                         });
@@ -969,9 +975,9 @@
         }
     }
 
-        // --- Firebase Data Loading and Listeners ---
+        // --- Pemuatan dan Pendengar Data Firebase ---
 
-        // Function to load all user data from Firestore
+        // Fungsi untuk memuat semua data pengguna dari Firestore
         async function loadAllUserData() {
             if (!isFirebaseReady) {
                 console.warn("DEBUG: Firebase belum siap untuk memuat data.");
@@ -996,8 +1002,8 @@
                 } else {
                     console.log("DEBUG: Dokumen profil tidak ditemukan, menggunakan data default.");
                 }
-                loadProfileData(); // Update UI with loaded profile
-                applyTheme(currentTheme); // Apply loaded theme
+                loadProfileData(); // Perbarui UI dengan profil yang dimuat
+                applyTheme(currentTheme); // Terapkan tema yang dimuat
                 document.getElementById('themeSelect').value = currentTheme;
 
                 console.log("DEBUG: Memuat tautan eksternal...");
@@ -1006,7 +1012,7 @@
                 if (linksDocSnap.exists()) {
                     externalLinks = linksDocSnap.data();
                     console.log("DEBUG: Tautan eksternal dimuat:", externalLinks);
-                    // Populate input fields with loaded links
+                    // Isi bidang input dengan tautan yang dimuat
                     for (const key in externalLinks) {
                         const inputElement = document.getElementById(key);
                         if (inputElement) {
@@ -1015,7 +1021,7 @@
                     }
                 } else {
                     console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, menggunakan data kosong.");
-                    externalLinks = {}; // Reset if document doesn't exist
+                    externalLinks = {}; // Reset jika dokumen tidak ada
                 }
 
             } catch (error) {
@@ -1024,7 +1030,7 @@
             }
         }
 
-        // Setup real-time listeners for modules
+        // Siapkan pendengar real-time untuk modul
         function setupRealtimeListeners() {
             if (!isFirebaseReady) {
                 console.warn("DEBUG: Firebase belum siap, tidak dapat menyiapkan pendengar real-time.");
@@ -1039,7 +1045,7 @@
                     updatedModules.push({ id: doc.id, ...doc.data() });
                 });
                 modulesData = updatedModules;
-                renderModules(); // Re-render modules whenever data changes in Firestore
+                renderModules(); // Render ulang modul setiap kali data berubah di Firestore
                 console.log("DEBUG: Modul diperbarui secara real-time:", modulesData);
             }, (error) => {
                 console.error("DEBUG: Kesalahan saat mendengarkan modul:", error);
@@ -1052,7 +1058,7 @@
                 if (docSnap.exists()) {
                     externalLinks = docSnap.data();
                     console.log("DEBUG: Tautan eksternal diperbarui secara real-time:", externalLinks);
-                    // Update relevant input fields
+                    // Perbarui bidang input yang relevan
                     for (const key in externalLinks) {
                         const inputElement = document.getElementById(key);
                         if (inputElement) {
@@ -1061,7 +1067,7 @@
                     }
                 } else {
                     console.log("DEBUG: Dokumen tautan eksternal tidak ditemukan, mereset data.");
-                    externalLinks = {}; // Reset if document doesn't exist
+                    externalLinks = {}; // Reset jika dokumen tidak ada
                 }
             }, (error) => {
                 console.error("DEBUG: Kesalahan saat mendengarkan tautan eksternal:", error);
@@ -1081,8 +1087,8 @@
                         photo: data.photo || ''
                     };
                     currentTheme = data.theme || 'default';
-                    loadProfileData(); // Update profile UI
-                    applyTheme(currentTheme); // Apply theme
+                    loadProfileData(); // Perbarui UI profil
+                    applyTheme(currentTheme); // Terapkan tema
                     document.getElementById('themeSelect').value = currentTheme;
                     console.log("DEBUG: Profil dan pengaturan diperbarui secara real-time:", profileData, currentTheme);
                 } else {
@@ -1095,7 +1101,7 @@
         }
 
 
-        // --- Profile Management ---
+        // --- Manajemen Profil ---
         function loadProfileData() {
             document.getElementById('namaGuru').value = profileData.nama;
             document.getElementById('nipGuru').value = profileData.nip;
@@ -1116,7 +1122,7 @@
                 headerProfileIcon.classList.add('hidden');
             } else {
                 profilePhoto.src = defaultProfilePhoto;
-                profilePhoto.classList.remove('hidden'); // Ensure placeholder is visible
+                profilePhoto.classList.remove('hidden'); // Pastikan placeholder terlihat
                 deletePhotoBtn.classList.add('hidden');
                 headerProfilePhoto.classList.add('hidden');
                 headerProfileIcon.classList.remove('hidden');
@@ -1135,7 +1141,7 @@
                 profileData.nomorWA = document.getElementById('nomorWAGuru').value;
 
                 const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
-                await setDoc(profileDocRef, profileData, { merge: true }); // Merge to update only changed fields
+                await setDoc(profileDocRef, profileData, { merge: true }); // Gabungkan untuk memperbarui hanya bidang yang berubah
                 showMessage('Profil berhasil disimpan!');
             } catch (error) {
                 console.error("DEBUG: Error saving profile data:", error);
@@ -1168,22 +1174,22 @@
                 const reader = new FileReader();
                 reader.onload = async (e) => {
                     profileData.photo = e.target.result;
-                    await saveProfileData(); // Save with new photo
+                    await saveProfileData(); // Simpan dengan foto baru
                 };
                 reader.readAsDataURL(file);
             }
         });
 
         document.getElementById('deletePhotoBtn').addEventListener('click', async () => {
-            profileData.photo = ''; // Clear photo
-            await saveProfileData(); // Save changes
+            profileData.photo = ''; // Hapus foto
+            await saveProfileData(); // Simpan perubahan
             showMessage('Foto profil berhasil dihapus.');
         });
 
-        // --- Modul Ajar Management ---
+        // --- Manajemen Modul Ajar ---
         function renderModules() {
             const modulAjarList = document.getElementById('modulAjarList');
-            modulAjarList.innerHTML = ''; // Clear existing list
+            modulAjarList.innerHTML = ''; // Hapus daftar yang ada
 
             if (modulesData.length === 0) {
                 modulAjarList.innerHTML = '<p class="text-gray-600 text-center">Belum ada modul ajar yang ditambahkan.</p>';
@@ -1199,15 +1205,16 @@
                             <input type="text" id="subject${modul.id}" value="${modul.subject}" placeholder="Contoh: Matematika" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updateModule('${modul.id}', 'subject', this.value)">
                         </div>
                         <div>
-                            <label for="link${modul.id}" class="block text-gray-700 text-sm font-bold mb-1 text-left">Tautan Google Docs/Drive:</label>
+                            <label for="link${modul.id}" class="block text-gray-700 text-sm font-bold mb-1 text-left">Link Modul Ajar:</label>
                             <input type="text" id="link${modul.id}" value="${modul.link}" placeholder="Contoh: https://docs.google.com/document/d/e/..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updateModule('${modul.id}', 'link', this.value)">
                         </div>
                     </div>
                     <div class="modul-actions flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mt-3 sm:mt-0">
                         <button onclick="openModuleLinkById('${modul.id}')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt"></i>
-                            <span>Buka</span>
+                            <span>Buka Dokumen</span>
                         </button>
+                        <!-- Penjelasan: Perubahan pada input di atas disimpan secara otomatis. -->
                         <button onclick="deleteModule('${modul.id}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-trash"></i>
                             <span>Hapus</span>
@@ -1278,7 +1285,37 @@
             }
         });
 
-        // --- External Links Management ---
+        document.getElementById('fill8ModulesBtn').addEventListener('click', async () => {
+            if (!isFirebaseReady) {
+                showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
+                return;
+            }
+            const modulesToAdd = 8 - modulesData.length;
+            if (modulesToAdd > 0) {
+                let addedCount = 0;
+                for (let i = 0; i < modulesToAdd && (modulesData.length + addedCount) < MAX_MODULES; i++) {
+                    try {
+                        const newModule = { subject: '', link: '' };
+                        await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'modules'), newModule);
+                        addedCount++;
+                    } catch (e) {
+                        console.error("DEBUG: Error adding document during fill:", e);
+                        showMessage("Gagal menambahkan beberapa modul ajar. Mohon coba lagi.");
+                        break; // Hentikan jika ada kesalahan
+                    }
+                }
+                if (addedCount > 0) {
+                    showMessage(`${addedCount} modul ajar kosong berhasil ditambahkan.`);
+                } else {
+                    showMessage('Tidak ada modul kosong yang bisa ditambahkan lagi (sudah mencapai 8 atau batas maksimum).');
+                }
+            } else {
+                showMessage('Anda sudah memiliki 8 modul ajar atau lebih.');
+            }
+        });
+
+
+        // --- Manajemen Tautan Eksternal ---
         async function saveExternalLink(inputId, value) {
             if (!isFirebaseReady) {
                 showMessage('Layanan data belum siap. Mohon tunggu sebentar.');
@@ -1287,15 +1324,15 @@
             try {
                 const linksDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'externalLinks');
                 await setDoc(linksDocRef, { [inputId]: value }, { merge: true });
-                externalLinks[inputId] = value; // Update local state immediately
-                console.log(`DEBUG: Link for ${inputId} saved.`);
+                externalLinks[inputId] = value; // Perbarui status lokal segera
+                console.log(`DEBUG: Tautan untuk ${inputId} disimpan.`);
             } catch (error) {
                 console.error(`DEBUG: Error saving link for ${inputId}:`, error);
                 showMessage(`Gagal menyimpan tautan untuk ${inputId}.`);
             }
         }
 
-        // Add event listeners for external link input fields
+        // Tambahkan event listener untuk bidang input tautan eksternal
         const linkInputs = ['jadwalLink', 'dataSiswaLink', 'daftarHadirLink', 'programSemesterLink', 'kalenderLink', 'asesmenLink', 'karyaInovatifLink', 'riwayatPelatihanLink', 'programKerjaGuruLink'];
         linkInputs.forEach(id => {
             const inputElement = document.getElementById(id);
@@ -1306,7 +1343,7 @@
             }
         });
 
-        // --- Theme Settings ---
+        // --- Pengaturan Tema ---
         const themeSelect = document.getElementById('themeSelect');
         const saveSettingsBtn = document.getElementById('saveSettingsBtn');
 
@@ -1323,7 +1360,7 @@
             try {
                 const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'settings', 'profileAndSettings');
                 await setDoc(profileDocRef, { theme: selectedTheme }, { merge: true });
-                currentTheme = selectedTheme; // Update local state
+                currentTheme = selectedTheme; // Perbarui status lokal
                 applyTheme(selectedTheme);
                 showMessage('Tema berhasil disimpan!');
             } catch (error) {
@@ -1333,20 +1370,20 @@
         });
 
         saveSettingsBtn.addEventListener('click', async () => {
-            // Theme change is already handled by the 'change' event listener on themeSelect
-            // This button can be used for other settings if added later, or just confirm.
+            // Perubahan tema sudah ditangani oleh event listener 'change' pada themeSelect
+            // Tombol ini dapat digunakan untuk pengaturan lain jika ditambahkan nanti, atau hanya untuk konfirmasi.
             showMessage('Pengaturan berhasil disimpan!');
         });
 
 
-        // Event listener for settings button
+        // Event listener untuk tombol pengaturan
         document.getElementById('settingsBtn').addEventListener('click', function() {
             showSection('pengaturan');
         });
 
-        // Initial setup
+        // Penyiapan awal
         document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase(); // Start Firebase initialization and auth
+            initializeFirebase(); // Mulai inisialisasi dan autentikasi Firebase
             showSection('home');
         });
     </script>
