@@ -397,24 +397,19 @@
                 </button>
                 <i class="fas fa-calendar-alt text-blue-600 mb-4 text-5xl"></i>
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">Jadwal Mengajar</h2>
-                <p class="text-lg text-gray-700 mb-6">Integrasikan jadwal Anda dari Google Calendar atau Google Sheet.</p>
+                <p class="text-lg text-gray-700 mb-6">Kelola jadwal Anda dengan tautan Google Calendar, Google Sheet, atau layanan lain seperti Canva. Dokumen akan dibuka di tab baru untuk pengeditan dan tampilan.</p>
                 <div class="mb-6 w-full max-w-2xl">
-                    <label for="jadwalLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Calendar/Sheet:</label>
+                    <label for="jadwalLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Dokumen Jadwal (Google Calendar/Sheet/Canva, dll.):</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" id="jadwalLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=...">
+                        <input type="text" id="jadwalLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=... atau tautan Canva">
                         <button onclick="openLink('jadwalLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
                             <i class="fas fa-external-link-alt w-4 h-4"></i>
                             <span>Buka & Kelola/Unduh</span>
                         </button>
                     </div>
                     <p class="text-sm text-gray-600 mt-2 text-left">
-                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                        <i class="fas fa-info-circle mr-1"></i> Dokumen akan dibuka di tab baru. Beberapa layanan mungkin membatasi tampilan langsung di halaman ini.
                     </p>
-                </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="jadwalIframe" src="" class="w-full h-full border-none" title="Jadwal Mengajar" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
                 </div>
                 <button onclick="printSection('jadwalMengajar', 'jadwalLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
@@ -444,11 +439,6 @@
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="dataSiswaIframe" src="" class="w-full h-full border-none" title="Data Siswa" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
-                </div>
                 <button onclick="printSection('dataSiswa', 'dataSiswaLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
@@ -476,11 +466,6 @@
                     <p class="text-sm text-gray-600 mt-2 text-left">
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
-                </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="daftarHadirIframe" src="" class="w-full h-full border-none" title="Daftar Hadir" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
                 </div>
                 <button onclick="printSection('daftarHadir', 'daftarHadirLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
@@ -535,11 +520,6 @@
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="programSemesterIframe" src="" class="w-full h-full border-none" title="Program Semester & Tahunan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
-                </div>
                 <button onclick="printSection('programSemester', 'programSemesterLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
@@ -567,11 +547,6 @@
                     <p class="text-sm text-gray-600 mt-2 text-left">
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat. Untuk PDF, unggah ke Google Drive dan gunakan tautan berbagi.
                     </p>
-                </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="kalenderIframe" src="" class="w-full h-full border-none" title="Kalender Pendidikan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
                 </div>
                 <button onclick="printSection('kalenderPendidikan', 'kalenderLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
@@ -601,11 +576,6 @@
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="asesmenIframe" src="" class="w-full h-full border-none" title="Asesmen" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
-                </div>
                 <button onclick="printSection('asesmen', 'asesmenLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
@@ -633,11 +603,6 @@
                     <p class="text-sm text-gray-600 mt-2 text-left">
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
-                </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="karyaInovatifIframe" src="" class="w-full h-full border-none" title="Karya Inovatif" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
                 </div>
                 <button onclick="printSection('karyaInovatif', 'karyaInovatifLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
@@ -667,11 +632,6 @@
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
                 </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="riwayatPelatihanIframe" src="" class="w-full h-full border-none" title="Riwayat Pelatihan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
-                </div>
                 <button onclick="printSection('riwayatPelatihan', 'riwayatPelatihanLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
                     <span>Cetak Dokumen</span>
@@ -699,11 +659,6 @@
                     <p class="text-sm text-gray-600 mt-2 text-left">
                         <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
                     </p>
-                </div>
-                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
-                    <iframe id="programKerjaIframe" src="" class="w-full h-full border-none" title="Program Kerja Guru" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-                        Browser Anda tidak mendukung iframe.
-                    </iframe>
                 </div>
                 <button onclick="printSection('programKerjaGuru', 'programKerjaLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <i class="fas fa-print"></i>
@@ -875,18 +830,13 @@
             }
         }
 
-        // Function to open link in new tab and update iframe
+        // Function to open link in new tab
+        // The iframe logic has been removed as it's unreliable for many external services.
         function openLink(inputId) {
             const inputElement = document.getElementById(inputId);
-            const iframeElement = document.getElementById(inputId.replace('Link', 'Iframe'));
             const url = inputElement.value;
 
             if (url) {
-                // Update iframe src if it exists
-                if (iframeElement) {
-                    iframeElement.src = url;
-                }
-                // Always open in new tab for direct access and download/print
                 window.open(url, '_blank');
             } else {
                 showMessage('Mohon masukkan tautan terlebih dahulu.');
