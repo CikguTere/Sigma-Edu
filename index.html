@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Edu - Administrasi Guru Kelas 5 SD</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Default Theme (Blue) - primary application colors */
+            --primary-bg: #2563eb; /* blue-600 */
+            --primary-hover: #1d4ed8; /* blue-700 */
+            --secondary-bg: #3b82f6; /* blue-500 */
+            --text-light: #ffffff;
+            --text-dark: #1f2937; /* gray-800 */
+            --body-bg: #f0f4f8; /* light gray for body background */
+
+            /* Specific Card Colors - darker, distinct */
+            --card-blue-bg: #2563eb; /* blue-600 */
+            --card-blue-hover: #1d4ed8; /* blue-700 */
+            --card-blue-text: #ffffff;
+
+            --card-green-bg: #16a34a; /* green-600 */
+            --card-green-hover: #15803d; /* green-700 */
+            --card-green-text: #ffffff;
+
+            --card-yellow-bg: #ca8a04; /* yellow-600 */
+            --card-yellow-hover: #a16207; /* yellow-700 */
+            --card-yellow-text: #ffffff;
+
+            --card-purple-bg: #7c3aed; /* purple-600 */
+            --card-purple-hover: #6d28d9; /* purple-700 */
+            --card-purple-text: #ffffff;
+
+            --card-orange-bg: #ea580c; /* orange-600 */
+            --card-orange-hover: #c2410c; /* orange-700 */
+            --card-orange-text: #ffffff;
+
+            --card-teal-bg: #0d9488; /* teal-600 */
+            --card-teal-hover: #0f766e; /* teal-700 */
+            --card-teal-text: #ffffff;
+
+            --card-red-bg: #dc2626; /* red-600 */
+            --card-red-hover: #b91c1c; /* red-700 */
+            --card-red-text: #ffffff;
+
+            --card-pink-bg: #db2777; /* pink-600 */
+            --card-pink-hover: #be185d; /* pink-700 */
+            --card-pink-text: #ffffff;
+
+            --card-indigo-bg: #4f46e5; /* indigo-600 */
+            --card-indigo-hover: #4338ca; /* indigo-700 */
+            --card-indigo-text: #ffffff;
+
+            --card-gray-bg: #4b5563; /* gray-600 */
+            --card-gray-hover: #374151; /* gray-700 */
+            --card-gray-text: #ffffff;
+        }
+
+        /* Green Theme */
+        body[data-theme='green'] {
+            --primary-bg: #16a34a; /* green-600 */
+            --primary-hover: #15803d; /* green-700 */
+            --secondary-bg: #22c55e; /* green-500 */
+            --body-bg: #e7f5e9; /* Lighter green background */
+        }
+
+        /* Purple Theme */
+        body[data-theme='purple'] {
+            --primary-bg: #7c3aed; /* purple-600 */
+            --primary-hover: #6d28d9; /* purple-700 */
+            --secondary-bg: #8b5cf6; /* purple-500 */
+            --body-bg: #f3e8ff; /* Lighter purple background */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--body-bg); /* Use CSS variable for body background */
+        }
+        /* Header, buttons, and other elements use primary colors */
+        .header-bg {
+            background-color: var(--primary-bg);
+        }
+        .header-button {
+            background-color: var(--primary-hover);
+        }
+        .header-button:hover {
+            background-color: var(--secondary-bg); /* A slightly different hover for header buttons */
+        }
+
+        /* Menu card colors will now be directly applied via specific classes */
+        .menu-card.card-blue {
+            background-color: var(--card-blue-bg);
+            color: var(--card-blue-text);
+        }
+        .menu-card.card-blue:hover {
+            background-color: var(--card-blue-hover);
+        }
+
+        .menu-card.card-green {
+            background-color: var(--card-green-bg);
+            color: var(--card-green-text);
+        }
+        .menu-card.card-green:hover {
+            background-color: var(--card-green-hover);
+        }
+        .menu-card.card-yellow {
+            background-color: var(--card-yellow-bg);
+            color: var(--card-yellow-text);
+        }
+        .menu-card.card-yellow:hover {
+            background-color: var(--card-yellow-hover);
+        }
+        .menu-card.card-purple {
+            background-color: var(--card-purple-bg);
+            color: var(--card-purple-text);
+        }
+        .menu-card.card-purple:hover {
+            background-color: var(--card-purple-hover);
+        }
+        .menu-card.card-orange {
+            background-color: var(--card-orange-bg);
+            color: var(--card-orange-text);
+        }
+        .menu-card.card-orange:hover {
+            background-color: var(--card-orange-hover);
+        }
+        .menu-card.card-teal {
+            background-color: var(--card-teal-bg);
+            color: var(--card-teal-text);
+        }
+        .menu-card.card-teal:hover {
+            background-color: var(--card-teal-hover);
+        }
+        .menu-card.card-red {
+            background-color: var(--card-red-bg);
+            color: var(--card-red-text);
+        }
+        .menu-card.card-red:hover {
+            background-color: var(--card-red-hover);
+        }
+        .menu-card.card-pink {
+            background-color: var(--card-pink-bg);
+            color: var(--card-pink-text);
+        }
+        .menu-card.card-pink:hover {
+            background-color: var(--card-pink-hover);
+        }
+        .menu-card.card-indigo {
+            background-color: var(--card-indigo-bg);
+            color: var(--card-indigo-text);
+        }
+        .menu-card.card-indigo:hover {
+            background-color: var(--card-indigo-hover);
+        }
+        .menu-card.card-gray { /* For Program Kerja Guru */
+            background-color: var(--card-gray-bg);
+            color: var(--card-gray-text);
+        }
+        .menu-card.card-gray:hover {
+            background-color: var(--card-gray-hover);
+        }
+
+        /* Style for scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        /* Card specific styles */
+        .menu-card {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            transform-origin: center;
+        }
+        .menu-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Profile thumbnail in header */
+        .profile-thumbnail-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        .profile-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+            transition: transform 0.2s ease-in-out;
+        }
+        .profile-thumbnail:hover {
+            transform: scale(1.1);
+        }
+        .profile-icon {
+            font-size: 2rem;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            padding: 5px; /* Adjust padding to make icon size similar to image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Custom Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="header-bg text-white p-4 shadow-lg z-10">
+        <div class="container mx-auto flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold flex items-center">
+                    <i class="fas fa-graduation-cap mr-3"></i> Sigma Edu
+                </h1>
+                <p class="text-sm mt-1">Developed by Cikgu Tere</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Profile Thumbnail in Header -->
+                <div id="headerProfileThumbnail" class="profile-thumbnail-container" onclick="showSection('profilGuru')">
+                    <!-- Image or Icon will be loaded by JavaScript -->
+                    <img id="headerProfilePhoto" src="" alt="Profil" class="profile-thumbnail hidden">
+                    <i id="headerProfileIcon" class="fas fa-user-circle profile-icon hidden"></i>
+                </div>
+
+                <button id="settingsBtn" class="header-button hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-cog"></i>
+                    <span>Pengaturan</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area - no sidebar -->
+    <div class="flex flex-1 pt-4 pb-4 px-4 md:px-8 lg:px-12"> <!-- Adjusted padding for no sidebar -->
+        <main class="flex-1 max-w-full">
+            <!-- Home Section (Dashboard with Menu Cards) -->
+            <section id="home" class="content-section bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center active-section">
+                <i class="fas fa-home text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Selamat Datang di Portal Administrasi Guru!</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Pilih menu di bawah ini untuk memulai pengelolaan administrasi Anda.
+                </p>
+                <!-- Menu Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-5xl">
+                    <!-- REMOVED Profile Card from here, now in header -->
+                    <div class="menu-card card-blue p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('jadwalMengajar')">
+                        <i class="fas fa-calendar-alt text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Jadwal Mengajar</h3>
+                    </div>
+                    <div class="menu-card card-green p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('dataSiswa')">
+                        <i class="fas fa-user-graduate text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Data Siswa</h3>
+                    </div>
+                    <div class="menu-card card-yellow p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('daftarHadir')">
+                        <i class="fas fa-check-square text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Daftar Hadir</h3>
+                    </div>
+                    <div class="menu-card card-purple p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('modulAjar')">
+                        <i class="fas fa-book text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Modul Ajar</h3>
+                    </div>
+                    <div class="menu-card card-orange p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('programSemester')">
+                        <i class="fas fa-chart-bar text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Program Semester & Tahunan</h3>
+                    </div>
+                    <div class="menu-card card-teal p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('kalenderPendidikan')">
+                        <i class="fas fa-calendar-check text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Kalender Pendidikan</h3>
+                    </div>
+                    <div class="menu-card card-red p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('asesmen')">
+                        <i class="fas fa-pencil-alt text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Asesmen</h3>
+                    </div>
+                    <div class="menu-card card-pink p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('karyaInovatif')">
+                        <i class="fas fa-lightbulb text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Karya Inovatif</h3>
+                    </div>
+                    <div class="menu-card card-indigo p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('riwayatPelatihan')">
+                        <i class="fas fa-graduation-cap text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Riwayat Pelatihan</h3>
+                    </div>
+                    <div class="menu-card card-gray p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center" onclick="showSection('programKerjaGuru')">
+                        <i class="fas fa-clipboard-list text-5xl mb-3"></i>
+                        <h3 class="text-xl font-semibold">Program Kerja Guru</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profil Guru Section -->
+            <section id="profilGuru" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-user-circle text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Profil Guru</h2>
+                <p class="text-lg text-gray-700 mb-6">Kelola informasi pribadi Anda.</p>
+                <div class="w-full max-w-md text-left">
+                    <div class="mb-6 flex flex-col items-center">
+                        <img id="profilePhoto" src="https://placehold.co/150x150/e0e0e0/ffffff?text=Foto" alt="Foto Profil" class="w-32 h-32 rounded-full object-cover mb-4 border-2 border-gray-300">
+                        <input type="file" id="uploadPhoto" accept="image/*" class="hidden">
+                        <div class="flex space-x-2">
+                            <button onclick="document.getElementById('uploadPhoto').click()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fas fa-upload"></i>
+                                <span>Tambah Foto</span>
+                            </button>
+                            <button id="deletePhotoBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 hidden">
+                                <i class="fas fa-trash"></i>
+                                <span>Hapus Foto</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="namaGuru" class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap:</label>
+                        <input type="text" id="namaGuru" value="[Nama Guru]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+                    </div>
+                    <div class="mb-4">
+                        <label for="nipGuru" class="block text-gray-700 text-sm font-bold mb-2">NIP:</label>
+                        <input type="text" id="nipGuru" value="[NIP]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+                    </div>
+                    <div class="mb-4">
+                        <label for="emailGuru" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                        <input type="email" id="emailGuru" value="[Email]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+                    </div>
+                    <div class="mb-6">
+                        <label for="nomorWAGuru" class="block text-gray-700 text-sm font-bold mb-2">Nomor WhatsApp:</label>
+                        <input type="text" id="nomorWAGuru" value="[Nomor WA]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button id="editProfilBtn" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-edit"></i>
+                            <span>Edit/Ubah</span>
+                        </button>
+                        <button id="simpanProfilBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 hidden">
+                            <i class="fas fa-save"></i>
+                            <span>Simpan</span>
+                        </button>
+                        <button onclick="printSection('profilGuru')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-print"></i>
+                            <span>Cetak Dokumen</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jadwal Mengajar Section -->
+            <section id="jadwalMengajar" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-calendar-alt text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Jadwal Mengajar</h2>
+                <p class="text-lg text-gray-700 mb-6">Integrasikan jadwal Anda dari Google Calendar atau Google Sheet.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="jadwalLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Calendar/Sheet:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="jadwalLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=...">
+                        <button onclick="openLink('jadwalLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="jadwalIframe" src="" class="w-full h-full border-none" title="Jadwal Mengajar" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('jadwalMengajar', 'jadwalLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Data Siswa Section -->
+            <section id="dataSiswa" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-user-graduate text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Data Siswa</h2>
+                <p class="text-lg text-gray-700 mb-6">Lihat dan kelola data siswa dari Google Sheets (Dapodik).</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="dataSiswaLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Sheet Data Siswa:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="dataSiswaLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/spreadsheets/d/e/...">
+                        <button onclick="openLink('dataSiswaLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="dataSiswaIframe" src="" class="w-full h-full border-none" title="Data Siswa" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('dataSiswa', 'dataSiswaLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Daftar Hadir Section -->
+            <section id="daftarHadir" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-check-square text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Daftar Hadir Harian & Rekap Bulanan</h2>
+                <p class="text-lg text-gray-700 mb-6">Formulir harian dan rekap otomatis dari Google Sheets. Tampilan rekap dapat difilter per bulan.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="daftarHadirLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Sheet Daftar Hadir:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="daftarHadirLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/spreadsheets/d/e/...">
+                        <button onclick="openLink('daftarHadirLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="daftarHadirIframe" src="" class="w-full h-full border-none" title="Daftar Hadir" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('daftarHadir', 'daftarHadirLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Modul Ajar Section -->
+            <section id="modulAjar" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-book text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Modul Ajar</h2>
+                <p class="text-lg text-gray-700 mb-6">Kelola modul ajar Anda per mata pelajaran dengan tautan Google Docs/Drive.</p>
+
+                <div id="modulAjarList" class="w-full flex flex-col gap-4 max-w-2xl">
+                    <!-- Module items will be rendered here by JavaScript -->
+                </div>
+
+                <button id="addModuleBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-6 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-plus"></i>
+                    <span>Tambah Modul Ajar</span>
+                </button>
+
+                <button onclick="printSection('modulAjar')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Program Semester & Tahunan Section -->
+            <section id="programSemester" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-chart-bar text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Program Semester & Program Tahunan</h2>
+                <p class="text-lg text-gray-700 mb-6">Format tampilan tabel. Dokumen diambil dari Google Docs/Sheets.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="programSemesterLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Docs/Sheets Program:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="programSemesterLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/document/d/e/...">
+                        <button onclick="openLink('programSemesterLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="programSemesterIframe" src="" class="w-full h-full border-none" title="Program Semester & Tahunan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('programSemester', 'programSemesterLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Kalender Pendidikan Section -->
+            <section id="kalenderPendidikan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-calendar-check text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Kalender Pendidikan</h2>
+                <p class="text-lg text-gray-700 mb-6">Sinkron dengan Google Calendar atau unggah file PDF. Tampilan warna per bulan dan per kegiatan.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="kalenderLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Calendar/PDF:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="kalenderLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://calendar.google.com/calendar/embed?src=...">
+                        <button onclick="openLink('kalenderLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat. Untuk PDF, unggah ke Google Drive dan gunakan tautan berbagi.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="kalenderIframe" src="" class="w-full h-full border-none" title="Kalender Pendidikan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('kalenderPendidikan', 'kalenderLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Asesmen Section -->
+            <section id="asesmen" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-pencil-alt text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Asesmen</h2>
+                <p class="text-lg text-gray-700 mb-6">Data penilaian siswa per mata pelajaran dan per tema. Otomatis sinkron dengan spreadsheet asesmen.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="asesmenLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Sheet Asesmen:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="asesmenLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/spreadsheets/d/e/...">
+                        <button onclick="openLink('asesmenLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="asesmenIframe" src="" class="w-full h-full border-none" title="Asesmen" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('asesmen', 'asesmenLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Karya Inovatif Section -->
+            <section id="karyaInovatif" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-lightbulb text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Karya Inovatif</h2>
+                <p class="text-lg text-gray-700 mb-6">Tautan ke file Google Drive yang berisi karya guru. Tambahkan deskripsi, tanggal, dan jenis karya.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="karyaInovatifLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Drive Karya Inovatif:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="karyaInovatifLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://drive.google.com/drive/folders/...">
+                        <button onclick="openLink('karyaInovatifLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="karyaInovatifIframe" src="" class="w-full h-full border-none" title="Karya Inovatif" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('karyaInovatif', 'karyaInovatifLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Riwayat Pelatihan Section -->
+            <section id="riwayatPelatihan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-graduation-cap text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Riwayat Pelatihan</h2>
+                <p class="text-lg text-gray-700 mb-6">Form entri dan daftar pelatihan yang sudah diikuti. Tampilkan tanggal, topik, penyelenggara, dan bukti.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="riwayatPelatihanLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Sheet Riwayat Pelatihan:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="riwayatPelatihanLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/spreadsheets/d/e/...">
+                        <button onclick="openLink('riwayatPelatihanLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="riwayatPelatihanIframe" src="" class="w-full h-full border-none" title="Riwayat Pelatihan" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('riwayatPelatihan', 'riwayatPelatihanLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Program Kerja Guru Section -->
+            <section id="programKerjaGuru" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-clipboard-list text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Program Kerja Guru</h2>
+                <p class="text-lg text-gray-700 mb-6">Format tabel atau daftar kerja tahunan guru. Dapat diambil dari Google Docs.</p>
+                <div class="mb-6 w-full max-w-2xl">
+                    <label for="programKerjaLink" class="block text-gray-700 text-sm font-bold mb-2 text-left">Tautan Google Docs Program Kerja:</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="programKerjaLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: https://docs.google.com/document/d/e/...">
+                        <button onclick="openLink('programKerjaLink')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            <span>Buka & Kelola/Unduh</span>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-left">
+                        <i class="fas fa-info-circle mr-1"></i> Pastikan tautan Google Workspace Anda dibagikan secara publik atau dengan izin lihat.
+                    </p>
+                </div>
+                <div class="w-full h-[600px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 max-w-4xl">
+                    <iframe id="programKerjaIframe" src="" class="w-full h-full border-none" title="Program Kerja Guru" allowFullScreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+                        Browser Anda tidak mendukung iframe.
+                    </iframe>
+                </div>
+                <button onclick="printSection('programKerjaGuru', 'programKerjaLink')" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 mt-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Dokumen</span>
+                </button>
+            </section>
+
+            <!-- Pengaturan Section (Sederhana) -->
+            <section id="pengaturan" class="content-section hidden bg-white p-8 rounded-lg shadow-md mb-6 flex flex-col items-center text-center relative">
+                <!-- Added back button for settings section -->
+                <button onclick="showSection('home')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center space-x-2 absolute top-4 left-4 transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Beranda</span>
+                </button>
+                <i class="fas fa-cog text-blue-600 mb-4 text-5xl"></i>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Pengaturan</h2>
+                <p class="text-lg text-gray-700 mb-6">Sesuaikan pengaturan website Anda. Fitur ini masih dalam pengembangan untuk penambahan dan pengaturan urutan menu secara dinamis.</p>
+                <div class="w-full max-w-xl text-left">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Tema Warna</h3>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('default')">
+                            <span>Tema Biru</span>
+                        </button>
+                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('green')">
+                            <span>Tema Hijau</span>
+                        </button>
+                        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="applyTheme('purple')">
+                            <span>Tema Ungu</span>
+                        </button>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Manajemen Menu (Pengembangan)</h3>
+                    <p class="text-gray-700 mb-4">Fitur untuk menambah/mengedit/mengurutkan menu akan tersedia di pembaruan selanjutnya.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Tambah Menu sedang dalam pengembangan.')">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Tambah Menu</span>
+                        </button>
+                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Edit Menu sedang dalam pengembangan.')">
+                            <i class="fas fa-edit"></i>
+                            <span>Edit Menu</span>
+                        </button>
+                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105" onclick="showMessage('Fitur Hapus Menu sedang dalam pengembangan.')">
+                            <i class="fas fa-trash-alt"></i>
+                            <span>Hapus Menu</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Modal Structure -->
+    <div id="customModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="modalMessage" class="text-lg text-gray-800 mb-6"></p>
+            <button id="modalCloseBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Store profile data
+        let profileData = {
+            nama: "Nama Guru Lengkap",
+            nip: "123456789012345678",
+            email: "guru.example@sekolah.sch.id",
+            nomorWA: "0812-3456-7890",
+            photo: "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto" // Default placeholder image
+        };
+
+        // Store modules data (initially 8 empty placeholders)
+        let modulesData = Array.from({ length: 8 }, () => ({ subject: '', link: '' }));
+        // Example for clarity (remove or modify in production)
+        modulesData[0] = { subject: 'Matematika', link: 'https://docs.google.com/document/d/1Wp2jK3nL5m_fQx_zY_G8s0pE0cW_y_X0/edit?usp=sharing' };
+
+        const MAX_MODULES = 20; // Limit for modules
+
+        // --- Custom Modal Functions ---
+        function showMessage(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('customModal').classList.remove('hidden');
+        }
+
+        document.getElementById('modalCloseBtn').addEventListener('click', () => {
+            document.getElementById('customModal').classList.add('hidden');
+        });
+
+        // --- Theme Functions ---
+        const themes = {
+            'default': {
+                '--primary-bg': '#2563eb',
+                '--primary-hover': '#1d4ed8',
+                '--secondary-bg': '#3b82f6',
+                '--text-light': '#ffffff',
+                '--text-dark': '#1f2937',
+                '--body-bg': '#f0f4f8',
+            },
+            'green': {
+                '--primary-bg': '#16a34a',
+                '--primary-hover': '#15803d',
+                '--secondary-bg': '#22c55e',
+                '--text-light': '#ffffff',
+                '--text-dark': '#1f2937',
+                '--body-bg': '#e7f5e9',
+            },
+            'purple': {
+                '--primary-bg': '#7c3aed',
+                '--primary-hover': '#6d28d9',
+                '--secondary-bg': '#8b5cf6',
+                '--text-light': '#ffffff',
+                '--text-dark': '#1f2937',
+                '--body-bg': '#f3e8ff',
+            }
+        };
+
+        function applyTheme(themeName) {
+            const root = document.documentElement; // Target the :root pseudo-class for CSS variables
+            const body = document.body;
+            const selectedTheme = themes[themeName];
+
+            if (selectedTheme) {
+                for (const [property, value] of Object.entries(selectedTheme)) {
+                    root.style.setProperty(property, value);
+                }
+                body.setAttribute('data-theme', themeName); // Set data attribute on body
+                localStorage.setItem('selectedTheme', themeName); // Save theme preference
+            } else {
+                showMessage('Tema tidak ditemukan.');
+            }
+        }
+
+        // Function to update the profile thumbnail in the header
+        function updateHeaderProfileThumbnail() {
+            const headerProfilePhoto = document.getElementById('headerProfilePhoto');
+            const headerProfileIcon = document.getElementById('headerProfileIcon');
+
+            if (profileData.photo && profileData.photo !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
+                headerProfilePhoto.src = profileData.photo;
+                headerProfilePhoto.classList.remove('hidden');
+                headerProfileIcon.classList.add('hidden');
+            } else {
+                headerProfilePhoto.classList.add('hidden');
+                headerProfileIcon.classList.remove('hidden');
+            }
+        }
+
+        // Function to show/hide content sections
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('active-section');
+            });
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.remove('hidden');
+                activeSection.classList.add('active-section');
+            }
+
+            // For Profil Guru section, load data when shown
+            if (sectionId === 'profilGuru') {
+                loadProfileData();
+            }
+            // For Modul Ajar section, render modules when shown
+            if (sectionId === 'modulAjar') {
+                renderModules();
+            }
+        }
+
+        // Function to open link in new tab and update iframe
+        function openLink(inputId) {
+            const inputElement = document.getElementById(inputId);
+            const iframeElement = document.getElementById(inputId.replace('Link', 'Iframe'));
+            const url = inputElement.value;
+
+            if (url) {
+                // Update iframe src if it exists
+                if (iframeElement) {
+                    iframeElement.src = url;
+                }
+                // Always open in new tab for direct access and download/print
+                window.open(url, '_blank');
+            } else {
+                showMessage('Mohon masukkan tautan terlebih dahulu.');
+            }
+        }
+
+        // Function to print a specific section of the page
+        function printSection(sectionId, linkInputId = null) {
+            const sectionToPrint = document.getElementById(sectionId);
+            if (!sectionToPrint) {
+                showMessage('Bagian untuk dicetak tidak ditemukan.');
+                return;
+            }
+
+            // Specific handling for Modul Ajar section
+            if (sectionId === 'modulAjar') {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write('<html><head><title>Cetak Dokumen Modul Ajar</title>');
+                printWindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />');
+                printWindow.document.write('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
+                printWindow.document.write('<style>');
+                printWindow.document.write(`
+                    body { font-family: 'Inter', sans-serif; margin: 20px; }
+                    h2 { font-size: 24px; font-weight: bold; margin-bottom: 20px; text-align: center; }
+                    .module-list { list-style: none; padding: 0; }
+                    .module-item-print {
+                        border: 1px solid #eee;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        border-radius: 8px;
+                        background-color: #f9f9f9;
+                    }
+                    .module-item-print h3 { font-size: 18px; font-weight: bold; margin-bottom: 5px; color: #333; }
+                    .module-item-print p { font-size: 14px; color: #555; margin-bottom: 3px; word-break: break-all; }
+                `);
+                printWindow.document.write('</style></head><body>');
+                printWindow.document.write('<h2>Daftar Modul Ajar</h2>');
+                printWindow.document.write('<ul class="module-list">');
+                modulesData.forEach(module => {
+                    if (module.subject || module.link) { // Only print if there's data
+                        printWindow.document.write(`
+                            <li class="module-item-print">
+                                <h3>Mata Pelajaran: ${module.subject || 'Belum Diisi'}</h3>
+                                <p>Link Modul: <a href="${module.link}" target="_blank">${module.link || 'Tidak Ada Link'}</a></p>
+                            </li>
+                        `);
+                    }
+                });
+                printWindow.document.write('</ul>');
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+                printWindow.print();
+                return;
+            }
+
+            // For other sections (general handling)
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Cetak Dokumen</title>');
+            // Copy relevant styles for better print output
+            printWindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />');
+            printWindow.document.write('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
+            printWindow.document.write('<style>');
+            printWindow.document.write(`
+                body { font-family: 'Inter', sans-serif; margin: 20px; }
+                h2 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+                p { margin-bottom: 10px; }
+                .print-content {
+                    border: 1px solid #ccc;
+                    padding: 20px;
+                    border-radius: 8px;
+                    background-color: #fff;
+                }
+                .mb-4 { margin-bottom: 1rem; }
+                .font-bold { font-weight: bold; }
+                .text-gray-700 { color: #4a5568; }
+                /* Hide buttons and inputs for printing */
+                button, input[type="text"], input[type="email"], input[type="file"] {
+                    display: none !important;
+                }
+                label { display: block; } /* Ensure labels are visible */
+            `);
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write('<div class="print-content">');
+
+            // Clone the section and prepare for printing
+            const clonedSection = sectionToPrint.cloneNode(true);
+
+            // Remove the back button for printing
+            const backButton = clonedSection.querySelector('.absolute.top-4.left-4');
+            if (backButton) {
+                backButton.remove();
+            }
+
+            // For profile section, display values as text
+            if (sectionId === 'profilGuru') {
+                const profilePhoto = clonedSection.querySelector('#profilePhoto');
+                if (profilePhoto && profilePhoto.src && profilePhoto.src !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
+                     const photoDiv = document.createElement('div');
+                     photoDiv.innerHTML = `<h3 class="font-bold text-gray-700 mb-2 text-center">Foto Profil:</h3><img src="${profilePhoto.src}" style="width:150px; height:150px; border-radius:50%; object-fit:cover; margin: 0 auto 20px;">`;
+                     clonedSection.prepend(photoDiv);
+                }
+
+                const inputs = clonedSection.querySelectorAll('input');
+                inputs.forEach(input => {
+                    if (input.type !== 'file') { // Exclude file input from cloning text
+                        const label = input.previousElementSibling;
+                        const p = document.createElement('p');
+                        p.innerHTML = `<span class="font-bold text-gray-700">${label ? label.textContent : ''}</span> ${input.value}`;
+                        input.parentNode.replaceChild(p, input);
+                    } else {
+                        input.remove(); // Remove the file input itself
+                    }
+                });
+            }
+
+
+            printWindow.document.write(clonedSection.innerHTML);
+            printWindow.document.write('</div></body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // --- Profil Guru Specific Functions ---
+        function loadProfileData() {
+            document.getElementById('namaGuru').value = profileData.nama;
+            document.getElementById('nipGuru').value = profileData.nip;
+            document.getElementById('emailGuru').value = profileData.email;
+            document.getElementById('nomorWAGuru').value = profileData.nomorWA;
+            document.getElementById('profilePhoto').src = profileData.photo;
+            setProfileFieldsDisabled(true); // Ensure fields are disabled by default
+            document.getElementById('editProfilBtn').classList.remove('hidden');
+            document.getElementById('simpanProfilBtn').classList.add('hidden');
+            // Show/hide delete photo button based on whether a custom photo is loaded
+            if (profileData.photo !== "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto") {
+                document.getElementById('deletePhotoBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('deletePhotoBtn').classList.add('hidden');
+            }
+            updateHeaderProfileThumbnail(); // Update header thumbnail when profile data is loaded/changed
+        }
+
+        function setProfileFieldsDisabled(disabled) {
+            document.getElementById('namaGuru').disabled = disabled;
+            document.getElementById('nipGuru').disabled = disabled;
+            document.getElementById('emailGuru').disabled = disabled;
+            document.getElementById('nomorWAGuru').disabled = disabled;
+        }
+
+        document.getElementById('editProfilBtn').addEventListener('click', function() {
+            setProfileFieldsDisabled(false);
+            this.classList.add('hidden');
+            document.getElementById('simpanProfilBtn').classList.remove('hidden');
+        });
+
+        document.getElementById('simpanProfilBtn').addEventListener('click', function() {
+            profileData.nama = document.getElementById('namaGuru').value;
+            profileData.nip = document.getElementById('nipGuru').value;
+            profileData.email = document.getElementById('emailGuru').value;
+            profileData.nomorWA = document.getElementById('nomorWAGuru').value;
+            setProfileFieldsDisabled(true);
+            this.classList.add('hidden');
+            document.getElementById('editProfilBtn').classList.remove('hidden');
+            updateHeaderProfileThumbnail(); // Update header thumbnail after saving profile
+            showMessage('Profil berhasil diperbarui!');
+            showSection('home'); // Kembali ke beranda setelah simpan
+        });
+
+        // Photo upload functionality
+        document.getElementById('uploadPhoto').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePhoto').src = e.target.result;
+                    profileData.photo = e.target.result; // Store base64 string
+                    document.getElementById('deletePhotoBtn').classList.remove('hidden');
+                    updateHeaderProfileThumbnail(); // Update header thumbnail after uploading photo
+                    showMessage('Foto berhasil diunggah!');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('deletePhotoBtn').addEventListener('click', function() {
+            if (confirm('Apakah Anda yakin ingin menghapus foto profil?')) { // Using confirm here, as per previous iterations
+                document.getElementById('profilePhoto').src = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto"; // Reset to placeholder
+                profileData.photo = "https://placehold.co/150x150/e0e0e0/ffffff?text=Foto";
+                this.classList.add('hidden'); // Hide delete button
+                updateHeaderProfileThumbnail(); // Update header thumbnail after deleting photo
+                showMessage('Foto profil berhasil dihapus!');
+            }
+        });
+
+        // --- Modul Ajar Specific Functions ---
+        function renderModules() {
+            const container = document.getElementById('modulAjarList');
+            container.innerHTML = ''; // Clear existing modules
+
+            modulesData.forEach((module, index) => {
+                const moduleDiv = document.createElement('div');
+                moduleDiv.classList.add('module-item', 'bg-gray-50', 'p-4', 'rounded-lg', 'shadow-sm', 'mb-4', 'w-full');
+                moduleDiv.innerHTML = `
+                    <div class="mb-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-1 text-left">Mata Pelajaran:</label>
+                        <input type="text" class="subject-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="${module.subject}" disabled>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-1 text-left">Link Modul Ajar:</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" class="link-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan tautan Google Docs/Drive modul ajar" value="${module.link}" disabled>
+                            <button class="open-doc-btn bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fas fa-external-link-alt w-4 h-4"></i>
+                                <span>Buka Dokumen</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center sm:justify-end gap-2">
+                        <button class="edit-module-btn bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-edit"></i>
+                            <span>Edit/Ubah</span>
+                        </button>
+                        <button class="save-module-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105 hidden">
+                            <i class="fas fa-save"></i>
+                            <span>Simpan</span>
+                        </button>
+                        <button class="delete-module-btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-trash-alt"></i>
+                            <span>Hapus</span>
+                        </button>
+                        <button class="download-pdf-btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2 text-sm transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-download"></i>
+                            <span>Download PDF</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(moduleDiv);
+
+                const subjectInput = moduleDiv.querySelector('.subject-input');
+                const linkInput = moduleDiv.querySelector('.link-input');
+                const openDocBtn = moduleDiv.querySelector('.open-doc-btn');
+                const editBtn = moduleDiv.querySelector('.edit-module-btn');
+                const saveBtn = moduleDiv.querySelector('.save-module-btn');
+                const deleteBtn = moduleDiv.querySelector('.delete-module-btn');
+                const downloadPdfBtn = moduleDiv.querySelector('.download-pdf-btn');
+
+                editBtn.addEventListener('click', () => {
+                    subjectInput.disabled = false;
+                    linkInput.disabled = false;
+                    editBtn.classList.add('hidden');
+                    saveBtn.classList.remove('hidden');
+                });
+
+                saveBtn.addEventListener('click', () => {
+                    modulesData[index].subject = subjectInput.value;
+                    modulesData[index].link = linkInput.value;
+                    subjectInput.disabled = true;
+                    linkInput.disabled = true;
+                    editBtn.classList.remove('hidden');
+                    saveBtn.classList.add('hidden');
+                    showMessage('Modul berhasil diperbarui!');
+                });
+
+                deleteBtn.addEventListener('click', () => {
+                    if (confirm('Apakah Anda yakin ingin menghapus modul ini?')) { // Using confirm here, as per previous iterations
+                        modulesData.splice(index, 1);
+                        renderModules(); // Re-render the list
+                        showMessage('Modul berhasil dihapus!');
+                    }
+                });
+
+                openDocBtn.addEventListener('click', () => {
+                    if (linkInput.value) {
+                        window.open(linkInput.value, '_blank');
+                    } else {
+                        showMessage('Tidak ada tautan modul ajar untuk dibuka.');
+                    }
+                });
+
+                downloadPdfBtn.addEventListener('click', () => {
+                    if (linkInput.value) {
+                        // For Google Workspace links, direct download is not possible via client-side JS.
+                        // We instruct the user to download it from the opened tab.
+                        window.open(linkInput.value, '_blank');
+                        showMessage('Dokumen akan dibuka di tab baru. Dari sana, Anda dapat mengunduhnya dalam format PDF atau format lain yang didukung Google Workspace (biasanya melalui menu File > Download).');
+                    } else {
+                        showMessage('Tidak ada tautan modul ajar untuk diunduh.');
+                    }
+                });
+            });
+        }
+
+        document.getElementById('addModuleBtn').addEventListener('click', () => {
+            if (modulesData.length < MAX_MODULES) {
+                modulesData.push({ subject: '', link: '' });
+                renderModules();
+            } else {
+                showMessage(`Anda telah mencapai batas maksimum ${MAX_MODULES} modul ajar.`);
+            }
+        });
+
+        // Event listener for settings button
+        document.getElementById('settingsBtn').addEventListener('click', function() {
+            showSection('pengaturan');
+        });
+
+        // Show home page and initialize header thumbnail when the application is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+            updateHeaderProfileThumbnail(); // Initial load of header thumbnail
+
+            // Load saved theme on startup
+            const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+            applyTheme(savedTheme);
+        });
+    </script>
+</body>
+</html>
